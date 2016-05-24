@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "dust", schema = "dbo", catalog = "xcjk")
 public class Dust implements java.io.Serializable {
 	/**
-	 * 
+	 * 扬尘
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;

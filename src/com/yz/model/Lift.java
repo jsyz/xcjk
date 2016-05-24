@@ -17,8 +17,10 @@ public class Lift implements java.io.Serializable {
 	private Integer projectId;
 	private Integer DTUnumber;
 	private String attendanceData;
+	
 	private Boolean hoistingAlarm;
 	private Boolean squattingAlarm;
+	
 
 	public Lift() {
 
