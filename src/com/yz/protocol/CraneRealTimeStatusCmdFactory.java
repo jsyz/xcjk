@@ -75,7 +75,7 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		crane.setAngleWarning(flag1[3]);
 		crane.setWindWarning(flag1[4]);
 		crane.setInclinationWarning(flag1[5]);
-		crane.setRelaysWarning(flag1[5]);
+		crane.setRelaysWarning(flag1[6]);
 
 		crane.setWeightAlarm(flag2[0]);
 		crane.setTorqueAlarm(flag2[1]);
