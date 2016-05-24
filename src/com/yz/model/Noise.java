@@ -13,9 +13,12 @@ public class Noise implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private Integer projectId;
+	
 	private Integer DTUnumber;
+	
 	private String data;
 
 	public Noise() {

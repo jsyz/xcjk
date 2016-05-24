@@ -17,13 +17,16 @@ public class Lift implements java.io.Serializable {
 	private Integer projectId;
 	private Integer DTUnumber;
 	private String attendanceData;
+	
 	private Boolean hoistingAlarm;
 	private Boolean squattingAlarm;
+
 	private Boolean faceDetectionError;
 	private Boolean controlSignalError;
 	private Boolean singleDoorError;
 	private Boolean DoubleDoorError;
 	private Boolean topDoorError;
+
 
 	public Lift() {
 
@@ -81,6 +84,46 @@ public class Lift implements java.io.Serializable {
 
 	public void setSquattingAlarm(Boolean squattingAlarm) {
 		this.squattingAlarm = squattingAlarm;
+	}
+	@Column(name = "faceDetectionError")
+	public Boolean getFaceDetectionError() {
+		return faceDetectionError;
+	}
+
+	public void setFaceDetectionError(Boolean faceDetectionError) {
+		this.faceDetectionError = faceDetectionError;
+	}
+	@Column(name = "controlSignalError")
+	public Boolean getControlSignalError() {
+		return controlSignalError;
+	}
+
+	public void setControlSignalError(Boolean controlSignalError) {
+		this.controlSignalError = controlSignalError;
+	}
+	@Column(name = "singleDoorError")
+	public Boolean getSingleDoorError() {
+		return singleDoorError;
+	}
+
+	public void setSingleDoorError(Boolean singleDoorError) {
+		this.singleDoorError = singleDoorError;
+	}
+
+	public Boolean getDoubleDoorError() {
+		return DoubleDoorError;
+	}
+	@Column(name = "doubleDoorError")
+	public void setDoubleDoorError(Boolean doubleDoorError) {
+		DoubleDoorError = doubleDoorError;
+	}
+
+	public Boolean getTopDoorError() {
+		return topDoorError;
+	}
+	@Column(name = "topDoorError")
+	public void setTopDoorError(Boolean topDoorError) {
+		this.topDoorError = topDoorError;
 	}
 
 }

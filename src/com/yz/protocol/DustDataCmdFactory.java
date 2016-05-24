@@ -5,9 +5,14 @@ import org.apache.mina.core.session.IoSession;
 import com.yz.mina.CmdFactoryBase;
 import com.yz.mina.CommandBase;
 import com.yz.mina.ICmdParser;
+import com.yz.model.Dust;
+import com.yz.utils.SqlServiceUtil;
+import com.yz.vo.Object_type;
 
 public class DustDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 
+	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
+	
 	public DustDataCmdFactory(byte[] data) {
 		super(data);
 		// TODO Auto-generated constructor stub
@@ -23,7 +28,7 @@ public class DustDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 		return super.OnAfter_Ack(session, cmd);
 	}
 
-	private void upload_dustdata(byte[] data, IoSession session) {
+	private void upload_dustdata(byte[] data, IoSession session) throws Exception {
 		// TODO Auto-generated method stub
 		
 		
@@ -32,7 +37,14 @@ public class DustDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 		
 		int DTUnumber = (int ) data[0]&0xff;
 		
-		int dust = ((data[3]&0xff)<<8) +(data[4]&0xff);
+		int dustData = ((data[3]&0xff)<<8) +(data[4]&0xff);
+		
+		//保存扬尘数据 
+		Dust dust = new Dust();
+		dust.setDTUnumber(DTUnumber);
+		dust.setData(dustData+"");
+		serviceUtil.addObject(Object_type.DUST, dust);
+		
 		
 		//float airLevel = (float) ((data[5]&0xff)/(10.0));
 		

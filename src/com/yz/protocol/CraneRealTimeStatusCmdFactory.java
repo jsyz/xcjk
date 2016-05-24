@@ -1,17 +1,20 @@
 package com.yz.protocol;
 
-import java.io.IOException;
-
 import org.apache.mina.core.session.IoSession;
 
 import com.yz.mina.CmdFactoryBase;
 import com.yz.mina.CommandBase;
 import com.yz.mina.ICmdParser;
+import com.yz.model.Crane;
+import com.yz.utils.SqlServiceUtil;
 import com.yz.utils.bytetofloat;
+import com.yz.vo.Object_type;
 
 public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		ICmdParser {
 
+	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
+	
 	public CraneRealTimeStatusCmdFactory(byte[] data) {
 		super(data);
 		// TODO Auto-generated constructor stub
@@ -28,7 +31,7 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 	}
 
 	private void upload_CraneRealTimeStatus(byte[] data, IoSession session)
-			throws IOException {
+			throws Exception {
 		// TODO Auto-generated method stub
 
 		int begin = 15;
@@ -60,7 +63,30 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 			}
 		}
 		for(boolean a: flag2)
+		{
 			System.out.println("the flag2 is "+a);
+		}
+		
+		//保存塔基信息
+		Crane crane = new Crane();
+		crane.setWeightWarning(flag1[0]);
+		crane.setHeightWarning(flag1[1]);
+		crane.setWidthWarning(flag1[2]);
+		crane.setAngleWarning(flag1[3]);
+		crane.setWindWarning(flag1[4]);
+		crane.setInclinationWarning(flag1[5]);
+		crane.setRelaysWarning(flag1[5]);
+
+		crane.setWeightAlarm(flag2[0]);
+		crane.setTorqueAlarm(flag2[1]);
+		crane.setHeightAlarm(flag2[2]);
+		crane.setWidthAlarm(flag2[3]);
+		crane.setAngleAlarm(flag2[4]);
+		crane.setWindAlarm(flag2[5]);
+		crane.setInclinationAlarm(flag2[6]);
+		crane.setAntiCollisionAlarm(flag2[7]);
+		serviceUtil.addObject(Object_type.CRANE, crane);
+			
 	}
 
 	@Override

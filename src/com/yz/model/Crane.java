@@ -10,13 +10,15 @@ import javax.persistence.Table;
 @Table(name = "crane", schema = "dbo", catalog = "xcjk")
 public class Crane implements java.io.Serializable {
 	/**
-	 * 
+	 * 塔基
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer projectId;
 	private Integer DTUnumber;
-	private String attendanceData;
+	
+	
+	private String attendanceData;//考勤人员
 
 	private Boolean weightWarning;
 	private Boolean heightWarning;
@@ -33,9 +35,46 @@ public class Crane implements java.io.Serializable {
 	private Boolean angleAlarm;
 	private Boolean windAlarm;
 	private Boolean inclinationAlarm;
+	private Boolean antiCollisionAlarm;
+	private Boolean zoneLimitAlarm;
 
 	public Crane() {
 
+	}
+
+	@Column(name = "angleAlarm")
+	public Boolean getAngleAlarm() {
+		return angleAlarm;
+	}
+
+	@Column(name = "angleWarning")
+	public Boolean getAngleWarning() {
+		return angleWarning;
+	}
+
+	@Column(name = "antiCollisionAlarm")
+	public Boolean getAntiCollisionAlarm() {
+		return antiCollisionAlarm;
+	}
+
+	@Column(name = "attendanceData", length = 30)
+	public String getAttendanceData() {
+		return attendanceData;
+	}
+
+	@Column(name = "DTUnumber", length = 30)
+	public Integer getDTUnumber() {
+		return DTUnumber;
+	}
+
+	@Column(name = "heightAlarm")
+	public Boolean getHeightAlarm() {
+		return heightAlarm;
+	}
+
+	@Column(name = "heightWarning")
+	public Boolean getHeightWarning() {
+		return heightWarning;
 	}
 
 	@Id
@@ -45,80 +84,9 @@ public class Crane implements java.io.Serializable {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	@Column(name = "projectId")
-	public Integer getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
-	}
-
-	@Column(name = "DTUnumber", length = 30)
-	public Integer getDTUnumber() {
-		return DTUnumber;
-	}
-
-	public void setDTUnumber(Integer unumber) {
-		DTUnumber = unumber;
-	}
-
-	@Column(name = "attendanceData", length = 30)
-	public String getAttendanceData() {
-		return attendanceData;
-	}
-
-	public void setAttendanceData(String attendanceData) {
-		this.attendanceData = attendanceData;
-	}
-
-	@Column(name = "weightWarning")
-	public Boolean getWeightWarning() {
-		return weightWarning;
-	}
-
-	public void setWeightWarning(Boolean weightWarning) {
-		this.weightWarning = weightWarning;
-	}
-
-	@Column(name = "heightWarning")
-	public Boolean getHeightWarning() {
-		return heightWarning;
-	}
-
-	public void setHeightWarning(Boolean heightWarning) {
-		this.heightWarning = heightWarning;
-	}
-
-	@Column(name = "widthWarning")
-	public Boolean getWidthWarning() {
-		return widthWarning;
-	}
-
-	public void setWidthWarning(Boolean widthWarning) {
-		this.widthWarning = widthWarning;
-	}
-
-	@Column(name = "angleWarning")
-	public Boolean getAngleWarning() {
-		return angleWarning;
-	}
-
-	public void setAngleWarning(Boolean angleWarning) {
-		this.angleWarning = angleWarning;
-	}
-
-	@Column(name = "windWarning")
-	public Boolean getWindWarning() {
-		return windWarning;
-	}
-
-	public void setWindWarning(Boolean windWarning) {
-		this.windWarning = windWarning;
+	@Column(name = "inclinationAlarm")
+	public Boolean getInclinationAlarm() {
+		return inclinationAlarm;
 	}
 
 	@Column(name = "inclinationWarning")
@@ -126,8 +94,9 @@ public class Crane implements java.io.Serializable {
 		return inclinationWarning;
 	}
 
-	public void setInclinationWarning(Boolean inclinationWarning) {
-		this.inclinationWarning = inclinationWarning;
+	@Column(name = "projectId")
+	public Integer getProjectId() {
+		return projectId;
 	}
 
 	@Column(name = "relaysWarning")
@@ -135,8 +104,9 @@ public class Crane implements java.io.Serializable {
 		return relaysWarning;
 	}
 
-	public void setRelaysWarning(Boolean relaysWarning) {
-		this.relaysWarning = relaysWarning;
+	@Column(name = "torqueAlarm")
+	public Boolean getTorqueAlarm() {
+		return torqueAlarm;
 	}
 
 	@Column(name = "weightAlarm")
@@ -144,26 +114,9 @@ public class Crane implements java.io.Serializable {
 		return weightAlarm;
 	}
 
-	public void setWeightAlarm(Boolean weightAlarm) {
-		this.weightAlarm = weightAlarm;
-	}
-
-	@Column(name = "torqueAlarm")
-	public Boolean getTorqueAlarm() {
-		return torqueAlarm;
-	}
-
-	public void setTorqueAlarm(Boolean torqueAlarm) {
-		this.torqueAlarm = torqueAlarm;
-	}
-
-	@Column(name = "heightAlarm")
-	public Boolean getHeightAlarm() {
-		return heightAlarm;
-	}
-
-	public void setHeightAlarm(Boolean heightAlarm) {
-		this.heightAlarm = heightAlarm;
+	@Column(name = "weightWarning")
+	public Boolean getWeightWarning() {
+		return weightWarning;
 	}
 
 	@Column(name = "widthAlarm")
@@ -171,17 +124,9 @@ public class Crane implements java.io.Serializable {
 		return widthAlarm;
 	}
 
-	public void setWidthAlarm(Boolean widthAlarm) {
-		this.widthAlarm = widthAlarm;
-	}
-
-	@Column(name = "angleAlarm")
-	public Boolean getAngleAlarm() {
-		return angleAlarm;
-	}
-
-	public void setAngleAlarm(Boolean angleAlarm) {
-		this.angleAlarm = angleAlarm;
+	@Column(name = "widthWarning")
+	public Boolean getWidthWarning() {
+		return widthWarning;
 	}
 
 	@Column(name = "windAlarm")
@@ -189,17 +134,96 @@ public class Crane implements java.io.Serializable {
 		return windAlarm;
 	}
 
-	public void setWindAlarm(Boolean windAlarm) {
-		this.windAlarm = windAlarm;
+	@Column(name = "windWarning")
+	public Boolean getWindWarning() {
+		return windWarning;
 	}
 
-	@Column(name = "inclinationAlarm")
-	public Boolean getInclinationAlarm() {
-		return inclinationAlarm;
+	@Column(name = "zoneLimitAlarm")
+	public Boolean getZoneLimitAlarm() {
+		return zoneLimitAlarm;
+	}
+
+	public void setAngleAlarm(Boolean angleAlarm) {
+		this.angleAlarm = angleAlarm;
+	}
+
+	public void setAngleWarning(Boolean angleWarning) {
+		this.angleWarning = angleWarning;
+	}
+
+	public void setAntiCollisionAlarm(Boolean antiCollisionAlarm) {
+		this.antiCollisionAlarm = antiCollisionAlarm;
+	}
+
+	public void setAttendanceData(String attendanceData) {
+		this.attendanceData = attendanceData;
+	}
+
+	public void setDTUnumber(Integer unumber) {
+		DTUnumber = unumber;
+	}
+
+	public void setHeightAlarm(Boolean heightAlarm) {
+		this.heightAlarm = heightAlarm;
+	}
+
+	public void setHeightWarning(Boolean heightWarning) {
+		this.heightWarning = heightWarning;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setInclinationAlarm(Boolean inclinationAlarm) {
 		this.inclinationAlarm = inclinationAlarm;
 	}
+
+	public void setInclinationWarning(Boolean inclinationWarning) {
+		this.inclinationWarning = inclinationWarning;
+	}
+
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
+
+	public void setRelaysWarning(Boolean relaysWarning) {
+		this.relaysWarning = relaysWarning;
+	}
+
+	public void setTorqueAlarm(Boolean torqueAlarm) {
+		this.torqueAlarm = torqueAlarm;
+	}
+
+	public void setWeightAlarm(Boolean weightAlarm) {
+		this.weightAlarm = weightAlarm;
+	}
+
+	public void setWeightWarning(Boolean weightWarning) {
+		this.weightWarning = weightWarning;
+	}
+
+	public void setWidthAlarm(Boolean widthAlarm) {
+		this.widthAlarm = widthAlarm;
+	}
+
+	public void setWidthWarning(Boolean widthWarning) {
+		this.widthWarning = widthWarning;
+	}
+
+	public void setWindAlarm(Boolean windAlarm) {
+		this.windAlarm = windAlarm;
+	}
+
+	public void setWindWarning(Boolean windWarning) {
+		this.windWarning = windWarning;
+	}
+
+	public void setZoneLimitAlarm(Boolean zoneLimitAlarm) {
+		this.zoneLimitAlarm = zoneLimitAlarm;
+	}
+	
+	
 
 }
