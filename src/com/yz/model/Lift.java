@@ -19,6 +19,11 @@ public class Lift implements java.io.Serializable {
 	private String attendanceData;
 	private Boolean hoistingAlarm;
 	private Boolean squattingAlarm;
+	private Boolean faceDetectionError;
+	private Boolean controlSignalError;
+	private Boolean singleDoorError;
+	private Boolean DoubleDoorError;
+	private Boolean topDoorError;
 
 	public Lift() {
 

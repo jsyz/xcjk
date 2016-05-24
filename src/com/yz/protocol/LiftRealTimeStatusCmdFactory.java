@@ -28,6 +28,18 @@ public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements ICmd
 	private void upload_RealTimeStatus(byte[] data, IoSession session) {
 		// TODO Auto-generated method stub
 		
+		boolean[] flag1 = new boolean[6]; // 故障标志
+		for (int j = 0; j < 7; j++) {
+			if (((data[38]) & (0x01 << j)) == 0) {
+				flag1[j] = false;
+			} else {
+				flag1[j] = true;
+			}
+		}
+		for(boolean a: flag1)
+			System.out.println("the flag1 is "+a);
+		
+		
 	}
 
 	@Override
@@ -36,21 +48,6 @@ public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements ICmd
 		
 		if(cmd.getCmdType() == this.expected_cmd)
 		{
-			
-//			String Reply_cmd = "FF FF FF FF 01 F0 9F 00 00 08 01 98";
-//			String[] cmds = Reply_cmd.split(" ");
-//	        byte[] aaa = new byte[cmds.length];
-//	        int i = 0;
-//	        for (String b : cmds) {
-//	            if (b.equals("FF")) {
-//	                aaa[i++] = -1;
-//	            } else {
-//	                aaa[i++] = Integer.valueOf(b, 16).byteValue();;
-//	            }
-//	        }
-//	        session.write(IoBuffer.wrap(aaa));
-			
-			
 			
 			OnAfter_Ack(session, cmd);
 		}
