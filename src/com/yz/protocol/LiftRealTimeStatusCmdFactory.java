@@ -28,7 +28,7 @@ public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements ICmd
 	private void upload_RealTimeStatus(byte[] data, IoSession session) {
 		// TODO Auto-generated method stub
 		
-		boolean[] flag1 = new boolean[6]; // 故障标志
+		boolean[] flag1 = new boolean[7]; // 故障标志
 		for (int j = 0; j < 7; j++) {
 			if (((data[38]) & (0x01 << j)) == 0) {
 				flag1[j] = false;
