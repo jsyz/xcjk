@@ -20,9 +20,8 @@ import com.yz.service.IDustService;
 @Component("dustAction")
 public class DustAciton extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
-
 	/**
-	 * 
+	 * 扬尘
 	 */
 	private static final long serialVersionUID = 1L;
 	Map<String, Object> request;
@@ -61,6 +60,13 @@ public class DustAciton extends ActionSupport implements RequestAware,
 		dusts = dustService.queryList(con, convalue,
 				projectId, page, size);
 		return "list";
+	}
+	
+	
+	public String listline() throws Exception {
+		
+		dusts = dustService.getDusts();
+		return "line";
 	}
 	
 	public IDustService getDustService() {
