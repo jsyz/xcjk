@@ -14,7 +14,7 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		ICmdParser {
 
 	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
-	
+
 	public CraneRealTimeStatusCmdFactory(byte[] data) {
 		super(data);
 		// TODO Auto-generated constructor stub
@@ -40,9 +40,9 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		for (int i = 0; i < 10; i++)
 			liftingData[i] = bytetofloat.bytes2float(data, begin + i * byteset,
 					byteset); // 起重量,起升高度,变幅幅度.....
-		for(float a: liftingData)
-			System.out.println("the Crane data is "+a);
-		
+		for (float a : liftingData)
+			System.out.println("the Crane data is " + a);
+
 		boolean[] flag1 = new boolean[7]; // 故障标志
 		for (int j = 0; j < 7; j++) {
 			if (((data[60]) & (0x01 << j)) == 0) {
@@ -51,9 +51,9 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 				flag1[j] = true;
 			}
 		}
-		for(boolean a: flag1)
-			System.out.println("the flag1 is "+a);
-		
+		for (boolean a : flag1)
+			System.out.println("the flag1 is " + a);
+
 		boolean[] flag2 = new boolean[8]; // 报警标志
 		for (int k = 0; k < 8; k++) {
 			if (((data[62]) & (0x01 << k)) == 0) {
@@ -62,15 +62,23 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 				flag2[k] = true;
 			}
 		}
-		for(boolean a: flag2)
-		{
-			System.out.println("the flag2 is "+a);
+		for (boolean a : flag2) {
+			System.out.println("the flag2 is " + a);
 		}
-		
-		//保存塔基信息
+
+		// 保存塔基信息
 		Crane crane = new Crane();
-		
-		
+
+		crane.setLiftingCapacity(String.valueOf(liftingData[0]));
+		crane.setLiftingHeight(String.valueOf(liftingData[1]));
+		crane.setLuffingWidth(String.valueOf(liftingData[2]));
+		crane.setRotationAngle(String.valueOf(liftingData[3]));
+		crane.setRatedTorque(String.valueOf(liftingData[4]));
+		crane.setSlope(String.valueOf(liftingData[5]));
+		crane.setWindVelocity(String.valueOf(liftingData[6]));
+		crane.setTorquePercent(String.valueOf(liftingData[7]));
+		crane.setRatedCapacity(String.valueOf(liftingData[8]));
+		crane.setCapacityPercent(String.valueOf(liftingData[9]));
 		
 		crane.setWeightWarning(flag1[0]);
 		crane.setHeightWarning(flag1[1]);
@@ -89,7 +97,7 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		crane.setInclinationAlarm(flag2[6]);
 		crane.setAntiCollisionAlarm(flag2[7]);
 		serviceUtil.addObject(Object_type.CRANE, crane);
-			
+
 	}
 
 	@Override
