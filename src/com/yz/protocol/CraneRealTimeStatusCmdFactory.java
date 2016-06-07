@@ -69,6 +69,9 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		
 		//保存塔基信息
 		Crane crane = new Crane();
+		
+		
+		
 		crane.setWeightWarning(flag1[0]);
 		crane.setHeightWarning(flag1[1]);
 		crane.setWidthWarning(flag1[2]);

@@ -13,3 +13,4 @@
 .mymetadata
 .project
  /bin
+*.properties

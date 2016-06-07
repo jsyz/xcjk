@@ -17,6 +17,14 @@ public class Crane implements java.io.Serializable {
 	private Integer projectId;
 	private Integer DTUnumber;
 	
+	private String weight;
+	private String weightPercent;
+	private String torque;
+	private String torquePercent;
+	private String startHeight;
+	private String endHeight;
+	private String startAngle;
+	private String endAngle;
 	
 	private String attendanceData;//考勤人员
 
@@ -222,6 +230,70 @@ public class Crane implements java.io.Serializable {
 
 	public void setZoneLimitAlarm(Boolean zoneLimitAlarm) {
 		this.zoneLimitAlarm = zoneLimitAlarm;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+	@Column(name = "weight", length = 30)
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
+	public String getWeightPercent() {
+		return weightPercent;
+	}
+	@Column(name = "weightPercent", length = 30)
+	public void setWeightPercent(String weightPercent) {
+		this.weightPercent = weightPercent;
+	}
+
+	public String getTorque() {
+		return torque;
+	}
+	@Column(name = "torque", length = 30)
+	public void setTorque(String torque) {
+		this.torque = torque;
+	}
+
+	public String getTorquePercent() {
+		return torquePercent;
+	}
+	@Column(name = "torquePercent", length = 30)
+	public void setTorquePercent(String torquePercent) {
+		this.torquePercent = torquePercent;
+	}
+
+	public String getStartHeight() {
+		return startHeight;
+	}
+	@Column(name = "startHeight", length = 30)
+	public void setStartHeight(String startHeight) {
+		this.startHeight = startHeight;
+	}
+
+	public String getEndHeight() {
+		return endHeight;
+	}
+	@Column(name = "endHeight", length = 30)
+	public void setEndHeight(String endHeight) {
+		this.endHeight = endHeight;
+	}
+
+	public String getStartAngle() {
+		return startAngle;
+	}
+	@Column(name = "startAngle", length = 30)
+	public void setStartAngle(String startAngle) {
+		this.startAngle = startAngle;
+	}
+
+	public String getEndAngle() {
+		return endAngle;
+	}
+	@Column(name = "endAngle", length = 30)
+	public void setEndAngle(String endAngle) {
+		this.endAngle = endAngle;
 	}
 	
 	
