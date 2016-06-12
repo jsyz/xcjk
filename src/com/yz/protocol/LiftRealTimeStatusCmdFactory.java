@@ -55,6 +55,8 @@ public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		lift.setSingleDoorError(flag1[4]);
 		lift.setDoubleDoorError(flag1[5]);
 		lift.setTopDoorError(flag1[6]);
+		
+		
 		serviceUtil.addObject(Object_type.LIFT, lift);
 
 	}

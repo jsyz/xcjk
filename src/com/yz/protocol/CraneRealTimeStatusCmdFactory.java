@@ -96,7 +96,8 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		crane.setWindAlarm(flag2[5]);
 		crane.setInclinationAlarm(flag2[6]);
 		crane.setAntiCollisionAlarm(flag2[7]);
-		serviceUtil.addObject(Object_type.CRANE, crane);
+		
+		//serviceUtil.addObject(Object_type.CRANE, crane);
 
 	}
 

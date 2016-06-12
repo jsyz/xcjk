@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "lift", schema = "dbo", catalog = "xcjk")
 public class Lift implements java.io.Serializable {
 	/**
-	 * 
+	 * 升降机
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
@@ -18,14 +18,21 @@ public class Lift implements java.io.Serializable {
 	private Integer DTUnumber;
 	private String attendanceData;
 	
-	private Boolean hoistingAlarm;
-	private Boolean squattingAlarm;
+	
+	private Boolean hoistingAlarm;//1：升降机冲顶报警 0：正常
+	private Boolean squattingAlarm;//1：升降机蹲底报警 0：正常
 
-	private Boolean faceDetectionError;
-	private Boolean controlSignalError;
-	private Boolean singleDoorError;
-	private Boolean DoubleDoorError;
-	private Boolean topDoorError;
+	private Boolean faceDetectionError;//1：人脸识别设备正被拆除 0：正常
+	private Boolean controlSignalError;//1：控制信号被短接 0：正常
+	private Boolean singleDoorError;//	1：单开门限位开关损坏 0：正常
+	private Boolean DoubleDoorError;//1：双开门限位开关损坏 0：正常
+	private Boolean topDoorError;//1：顶开门限位开关损坏 0：正常
+	
+	
+	
+
+	
+	
 
 
 	public Lift() {

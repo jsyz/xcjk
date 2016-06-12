@@ -6,25 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 塔基
+ */
 @Entity
 @Table(name = "crane", schema = "dbo", catalog = "xcjk")
 public class Crane implements java.io.Serializable {
-	/**
-	 * 塔基
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer projectId;
 	private Integer DTUnumber;
 
-	// private String weight;
-	// private String weightPercent;
-	// private String torque;
-	// private String torquePercent;
-	// private String startHeight;
-	// private String endHeight;
-	// private String startAngle;
-	// private String endAngle;
 
 	private String liftingCapacity; // 起重量
 	private String liftingHeight; // 起升高度
@@ -39,23 +32,23 @@ public class Crane implements java.io.Serializable {
 
 	private String attendanceData;// 考勤人员
 
-	private Boolean weightWarning;
-	private Boolean heightWarning;
-	private Boolean widthWarning;
-	private Boolean angleWarning;
-	private Boolean windWarning;
-	private Boolean inclinationWarning;
-	private Boolean relaysWarning;
-
-	private Boolean weightAlarm;
-	private Boolean torqueAlarm;
-	private Boolean heightAlarm;
-	private Boolean widthAlarm;
-	private Boolean angleAlarm;
-	private Boolean windAlarm;
-	private Boolean inclinationAlarm;
-	private Boolean antiCollisionAlarm;
-	private Boolean zoneLimitAlarm;
+	private Boolean weightWarning;//重量故障标志
+	private Boolean heightWarning;//高度故障标志
+	private Boolean widthWarning;//幅度故障标志
+	private Boolean angleWarning;//角度故障标志
+	private Boolean windWarning;//风速故障标志
+	private Boolean inclinationWarning;//倾角故障标志
+	private Boolean relaysWarning;//继电器故障标志
+	
+	private Boolean weightAlarm;//重量报警标志
+	private Boolean torqueAlarm;//力矩报警标志
+	private Boolean heightAlarm;//高度报警标志
+	private Boolean widthAlarm;//幅度报警标志
+	private Boolean angleAlarm;//角度报警标志
+	private Boolean windAlarm;//风速报警标志
+	private Boolean inclinationAlarm;//倾角报警标志
+	private Boolean antiCollisionAlarm;//防碰撞报警标志
+	private Boolean zoneLimitAlarm;//区域限制报警标志
 
 	public Crane() {
 

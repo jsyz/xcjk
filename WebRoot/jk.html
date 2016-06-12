@@ -20,8 +20,6 @@
 			src="js/public.js"></script>
 		<script language="javascript" type="text/javascript"
 			src="js/jquery.js"></script>
-
-
 		<style type="text/css">
 /* Custom Styles */
 ul.nav-tabs {
@@ -64,7 +62,7 @@ ul.nav-tabs li:last-child a {
 </style>
 
 
-		<title>空白页</title>
+		<title>监控主界面</title>
 
 
 	</head>
@@ -77,12 +75,11 @@ ul.nav-tabs li:last-child a {
 					<a class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:location.replace(location.href);" title="刷新当前页"><i
-						class="Hui-iconfont">&#xe68f;</i>
-					</a><a class="btn btn-success radius r mr-5 f-r"
+						class="Hui-iconfont">&#xe68f;</i> </a><a
+						class="btn btn-success radius r mr-5 f-r"
 						style="line-height: 1.6em; margin-top: 3px"
 						href="javascript:history.go(-1);" title="返回"><i
-						class="Hui-iconfont">&#xe66b;</i>
-					</a>
+						class="Hui-iconfont">&#xe66b;</i> </a>
 					</nav>
 					<p
 						style="line-height: 35px; margin-bottom: 0px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);">
@@ -93,8 +90,7 @@ ul.nav-tabs li:last-child a {
 						</sup>
 						造价 5343万 】
 						<a href="citylist.html"><span
-							class="label label-warning radius">片区切换</span>
-						</a>
+							class="label label-warning radius">片区切换</span> </a>
 					</p>
 				</div>
 			</div>
@@ -116,6 +112,10 @@ ul.nav-tabs li:last-child a {
 					<li role="presentation">
 						<a href="javascript:void(0)" id="tz" onClick="changeToYc();"
 							target="myiframe">扬尘监控</a>
+					</li>
+					<li role="presentation">
+						<a href="javascript:void(0)" id="tz" onClick="changeToLift();"
+							target="myiframe">升降机监控</a>
 					</li>
 					<li role="presentation">
 						<a href="javascript:void(0)" id="kq" onClick="changeToKq();"
@@ -157,6 +157,11 @@ ul.nav-tabs li:last-child a {
 	function changeToKq()
 	{
 		$("#iframepage").attr('src',"kq.html"); 
+	}
+	
+	function changeToLift()
+	{
+		$("#iframepage").attr('src',"lift.html"); 
 	}
 </script>
 

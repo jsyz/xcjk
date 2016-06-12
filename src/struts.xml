@@ -33,9 +33,105 @@
 			<result name="load">/usero_update.jsp</result>
 			<result name="view">/usero_view.jsp</result>
 			
-			
 			<result name="line">/dust_line.jsp</result>
 			
+			<result name="invalid.token">/op_failure_child.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="token">
+				<param name="includeMethods">add</param>
+				<param name="excludeMethods">default</param>
+			</interceptor-ref>
+		</action>
+	</package>
+	
+		<package name="crane" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="craneAction" class="craneAction">
+			<result name="loginSucc">/index.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+			<result name="opfailure_child">
+				/op_failure_child.jsp
+			</result>
+			<result name="success">/op_success.jsp</result>
+			<result name="success_child">/op_success_child.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+
+			<result name="list">/crane_manage.jsp</result>
+			<result name="add">/usero_add.jsp</result>
+			<result name="load">/usero_update.jsp</result>
+			<result name="view">/usero_view.jsp</result>
+			
+			<result name="line">/crane_line.jsp</result>
+			
+			<result name="invalid.token">/op_failure_child.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="token">
+				<param name="includeMethods">add</param>
+				<param name="excludeMethods">default</param>
+			</interceptor-ref>
+		</action>
+	</package>
+	
+	
+		<package name="noise" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="noiseAction" class="noiseAction">
+			<result name="loginSucc">/index.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+			<result name="opfailure_child">
+				/op_failure_child.jsp
+			</result>
+			<result name="success">/op_success.jsp</result>
+			<result name="success_child">/op_success_child.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+
+			<result name="list">/noise_manage.jsp</result>
+			<result name="add">/usero_add.jsp</result>
+			<result name="load">/usero_update.jsp</result>
+			<result name="view">/usero_view.jsp</result>
+			
+			<result name="line">/noise_line.jsp</result>
+			
+			<result name="invalid.token">/op_failure_child.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="token">
+				<param name="includeMethods">add</param>
+				<param name="excludeMethods">default</param>
+			</interceptor-ref>
+		</action>
+	</package>
+	
+	
+		<package name="lift" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="liftAction" class="liftAction">
+			<result name="loginSucc">/index.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+			<result name="opfailure_child">
+				/op_failure_child.jsp
+			</result>
+			<result name="success">/op_success.jsp</result>
+			<result name="success_child">/op_success_child.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+
+			<result name="list">/lift_manage.jsp</result>
+			<result name="add">/usero_add.jsp</result>
+			<result name="load">/usero_update.jsp</result>
+			<result name="view">/usero_view.jsp</result>
+			
+			<result name="line">/lift_line.jsp</result>
 			
 			<result name="invalid.token">/op_failure_child.jsp</result>
 			<interceptor-ref name="defaultStack" />
@@ -46,13 +142,6 @@
 		</action>
 	</package>
 
-
-	<package name="usero_json" extends="json-default">
-		<action name="deleteUseros" class="useroAction"
-			method="deleteUseros" />
-		<action name="checkUsername" class="useroAction"
-			method="checkUsername" />
-	</package>
 
 
 

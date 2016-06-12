@@ -14,14 +14,14 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yz.model.Dust;
-import com.yz.service.IDustService;
+import com.yz.model.Lift;
+import com.yz.service.ILiftService;
 
-@Component("dustAction")
-public class DustAciton extends ActionSupport implements RequestAware,
+@Component("liftAction")
+public class LiftAciton extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 	/**
-	 * 塔基
+	 * 升降机
 	 */
 	private static final long serialVersionUID = 1L;
 	Map<String, Object> request;
@@ -39,56 +39,54 @@ public class DustAciton extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 
-	private IDustService dustService;
-	private Dust dust;
-	private List<Dust> dusts;
+	private ILiftService liftService;
+	private Lift lift;
+	private List<Lift> lifts;
 
 	public String list() throws Exception {
 		// 判断会话是否失效
 		// 总记录数
 
-		int projectId = 1;
-
-		totalCount = dustService.getTotalCount(con, convalue, projectId);
-		// 总页数
-		pageCount = dustService.getPageCount(totalCount, size);
-		if (page > pageCount && pageCount != 0) {
-			page = pageCount;
-		}
-		// 所有当前页记录对象
-		dusts = dustService.queryList(con, convalue, projectId, page, size);
+		/*
+		 * int projectId = 1;
+		 * 
+		 * totalCount = liftService.getTotalCount(con, convalue, projectId); //
+		 * 总页数 pageCount =liftService.getPageCount(totalCount, size); if (page >
+		 * pageCount && pageCount != 0) { page = pageCount; } // 所有当前页记录对象 lifts =
+		 * liftService.queryList(con, convalue, projectId, page, size);
+		 */
 		return "list";
 	}
 
 	public String listline() throws Exception {
 
-		dusts = dustService.getDusts();
+		lifts = liftService.getLifts();
 		return "line";
 	}
 
-	public IDustService getDustService() {
-		return dustService;
+	public ILiftService getLiftService() {
+		return liftService;
 	}
 
 	@Resource
-	public void setDustService(IDustService dustService) {
-		this.dustService = dustService;
+	public void setLiftService(ILiftService liftService) {
+		this.liftService = liftService;
 	}
 
-	public Dust getDust() {
-		return dust;
+	public Lift getLift() {
+		return lift;
 	}
 
-	public void setDust(Dust dust) {
-		this.dust = dust;
+	public void setLift(Lift lift) {
+		this.lift = lift;
 	}
 
-	public List<Dust> getDusts() {
-		return dusts;
+	public List<Lift> getLifts() {
+		return lifts;
 	}
 
-	public void setDusts(List<Dust> dusts) {
-		this.dusts = dusts;
+	public void setLifts(List<Lift> lifts) {
+		this.lifts = lifts;
 	}
 
 	public void setRequest(Map<String, Object> request) {

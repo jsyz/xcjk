@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.ServerEndpoint;
 
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -14,14 +15,14 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yz.model.Dust;
-import com.yz.service.IDustService;
+import com.yz.model.Crane;
+import com.yz.service.ICraneService;
 
-@Component("dustAction")
-public class DustAciton extends ActionSupport implements RequestAware,
+@Component("craneAction")
+public class CraneAciton extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 	/**
-	 * 塔基
+	 * 噪音
 	 */
 	private static final long serialVersionUID = 1L;
 	Map<String, Object> request;
@@ -39,56 +40,55 @@ public class DustAciton extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 
-	private IDustService dustService;
-	private Dust dust;
-	private List<Dust> dusts;
+	private ICraneService craneService;
+	private Crane crane;
+	private List<Crane> cranes;
 
 	public String list() throws Exception {
 		// 判断会话是否失效
 		// 总记录数
 
-		int projectId = 1;
-
-		totalCount = dustService.getTotalCount(con, convalue, projectId);
-		// 总页数
-		pageCount = dustService.getPageCount(totalCount, size);
-		if (page > pageCount && pageCount != 0) {
-			page = pageCount;
-		}
-		// 所有当前页记录对象
-		dusts = dustService.queryList(con, convalue, projectId, page, size);
+		/*
+		 * int projectId = 1;
+		 * 
+		 * totalCount = craneService.getTotalCount(con, convalue, projectId); //
+		 * 总页数 pageCount =craneService.getPageCount(totalCount, size); if (page >
+		 * pageCount && pageCount != 0) { page = pageCount; } // 所有当前页记录对象
+		 * cranes = craneService.queryList(con, convalue, projectId, page,
+		 * size);
+		 */
 		return "list";
 	}
 
 	public String listline() throws Exception {
 
-		dusts = dustService.getDusts();
+		cranes = craneService.getCranes();
 		return "line";
 	}
 
-	public IDustService getDustService() {
-		return dustService;
+	public ICraneService getCraneService() {
+		return craneService;
 	}
 
 	@Resource
-	public void setDustService(IDustService dustService) {
-		this.dustService = dustService;
+	public void setCraneService(ICraneService craneService) {
+		this.craneService = craneService;
 	}
 
-	public Dust getDust() {
-		return dust;
+	public Crane getCrane() {
+		return crane;
 	}
 
-	public void setDust(Dust dust) {
-		this.dust = dust;
+	public void setCrane(Crane crane) {
+		this.crane = crane;
 	}
 
-	public List<Dust> getDusts() {
-		return dusts;
+	public List<Crane> getCranes() {
+		return cranes;
 	}
 
-	public void setDusts(List<Dust> dusts) {
-		this.dusts = dusts;
+	public void setCranes(List<Crane> cranes) {
+		this.cranes = cranes;
 	}
 
 	public void setRequest(Map<String, Object> request) {

@@ -6,12 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+/**
+ * 扬尘
+ */
 @Entity
 @Table(name = "dust", schema = "dbo", catalog = "xcjk")
 public class Dust implements java.io.Serializable {
-	/**
-	 * 扬尘
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer projectId;

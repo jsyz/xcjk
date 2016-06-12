@@ -9,14 +9,13 @@
 <link href="css/noise.css" rel="stylesheet" type="text/css" />
 <link href="css/Kentucky.css" rel="stylesheet" type="text/css" />
 <link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
-<title>噪音</title>
+<title>升降机</title>
 </head>
 <body>
 <div class="xmWraper">
   <div class="xmconbox">
     <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
   <div id="container" style="min-width:450px;height:230px; border:1px solid #09F"></div>
-<div style="font-size:80px; text-align:center;;">实时数据=45db</div>
 </div>
 </div>
   
@@ -34,18 +33,18 @@
 $(function () {
     $('#container').highcharts({
         title: {
-            text: '噪音数据',
+            text: '升降机报警',
             x: -20 //center
         },
         subtitle: {
             x: -20
         },
         xAxis: {
-            categories: ['08:00', '08:01', '08:02', '08:03', '08:04', '08:05','08:06', '08:07', '08:08', '08:09', '08:10', '08:11']
+            categories: ['2016-6-22', '2016-6-23', '2016-6-24', '2016-6-25', '2016-6-26', '2016-6-27','2016-6-28', '2016-6-29', '2016-6-30', '2016-7-1', '2016-7-2', '2016-7-3']
         },
         yAxis: {
             title: {
-                text: '分贝 (db)'
+                text: '次数'
             },
             plotLines: [{
                 value: 0,
@@ -54,7 +53,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: 'db'
+            valueSuffix: '次'
         },
         legend: {
             layout: 'vertical',
@@ -63,8 +62,11 @@ $(function () {
             borderWidth: 0
         },
         series: [{
-            name: '实时数据',
-            data: [35, 40, 45, 45, 46, 38, 39, 40, 42, 43, 45, 42]
+            name: '升降机冲顶报警',
+            data: [0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0]
+        },{
+            name: '升降机蹲底报警',
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
         }]
     });
 });

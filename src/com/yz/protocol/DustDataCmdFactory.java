@@ -43,6 +43,8 @@ public class DustDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 		Dust dust = new Dust();
 		dust.setDTUnumber(DTUnumber);
 		dust.setData(dustData+"");
+		
+		
 		serviceUtil.addObject(Object_type.DUST, dust);
 		
 		
