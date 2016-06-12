@@ -112,8 +112,9 @@
 		<script type="text/javascript">
 
 $(function () {
+	setInterval("ShowLights()",250);
     $('#container').highcharts({
-    	setInterval("ShowLights()",250);
+    
         title: {
             text: '塔基故障记录',
             x: -20 //center
