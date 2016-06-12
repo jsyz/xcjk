@@ -1,5 +1,7 @@
 package com.yz.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +9,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.ServerEndpoint;
+
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -19,7 +23,7 @@ import com.yz.model.Crane;
 import com.yz.service.ICraneService;
 
 @Component("craneAction")
-public class CraneAciton extends ActionSupport implements RequestAware,
+public class CraneAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 	/**
 	 * 噪音
@@ -43,6 +47,28 @@ public class CraneAciton extends ActionSupport implements RequestAware,
 	private ICraneService craneService;
 	private Crane crane;
 	private List<Crane> cranes;
+
+	public static Crane craneRealTime = new Crane();
+
+	/*
+	 * 实时数据
+	 */
+	public String realtimeCrane() {
+
+		JSONObject jsonObject = JSONObject.fromObject(craneRealTime);
+		// System.out.println(jsonObject.toString());
+		PrintWriter out;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			out.print(jsonObject);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return NONE;
+	}
 
 	public String list() throws Exception {
 		// 判断会话是否失效

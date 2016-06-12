@@ -1,11 +1,15 @@
 package com.yz.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -14,14 +18,15 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yz.model.Lift;
-import com.yz.service.ILiftService;
+import com.yz.model.Crane;
+import com.yz.model.Dust;
+import com.yz.service.IDustService;
 
-@Component("liftAction")
-public class LiftAciton extends ActionSupport implements RequestAware,
+@Component("dustAction")
+public class DustAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 	/**
-	 * 升降机
+	 * 扬尘
 	 */
 	private static final long serialVersionUID = 1L;
 	Map<String, Object> request;
@@ -39,54 +44,79 @@ public class LiftAciton extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 
-	private ILiftService liftService;
-	private Lift lift;
-	private List<Lift> lifts;
+	private IDustService dustService;
+	private Dust dust;
+	private List<Dust> dusts;
+
+	public static Dust dustRealTime = new Dust();
+	
+	
+	/*
+	 * 实时数据
+	 */
+	public String realtimeDust() {
+		
+		JSONObject jsonObject = JSONObject.fromObject(dustRealTime);
+		// System.out.println(jsonObject.toString());
+		PrintWriter out;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			out.print(jsonObject);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return NONE;
+	}
 
 	public String list() throws Exception {
 		// 判断会话是否失效
 		// 总记录数
 
-		/*
-		 * int projectId = 1;
-		 * 
-		 * totalCount = liftService.getTotalCount(con, convalue, projectId); //
-		 * 总页数 pageCount =liftService.getPageCount(totalCount, size); if (page >
-		 * pageCount && pageCount != 0) { page = pageCount; } // 所有当前页记录对象 lifts =
-		 * liftService.queryList(con, convalue, projectId, page, size);
-		 */
+		int projectId = 1;
+
+		totalCount = dustService.getTotalCount(con, convalue, projectId);
+		// 总页数
+		pageCount = dustService.getPageCount(totalCount, size);
+		if (page > pageCount && pageCount != 0) {
+			page = pageCount;
+		}
+		// 所有当前页记录对象
+		dusts = dustService.queryList(con, convalue, projectId, page, size);
 		return "list";
 	}
 
 	public String listline() throws Exception {
 
-		lifts = liftService.getLifts();
+		dusts = dustService.getDusts();
 		return "line";
 	}
 
-	public ILiftService getLiftService() {
-		return liftService;
+	public IDustService getDustService() {
+		return dustService;
 	}
 
 	@Resource
-	public void setLiftService(ILiftService liftService) {
-		this.liftService = liftService;
+	public void setDustService(IDustService dustService) {
+		this.dustService = dustService;
 	}
 
-	public Lift getLift() {
-		return lift;
+	public Dust getDust() {
+		return dust;
 	}
 
-	public void setLift(Lift lift) {
-		this.lift = lift;
+	public void setDust(Dust dust) {
+		this.dust = dust;
 	}
 
-	public List<Lift> getLifts() {
-		return lifts;
+	public List<Dust> getDusts() {
+		return dusts;
 	}
 
-	public void setLifts(List<Lift> lifts) {
-		this.lifts = lifts;
+	public void setDusts(List<Dust> dusts) {
+		this.dusts = dusts;
 	}
 
 	public void setRequest(Map<String, Object> request) {

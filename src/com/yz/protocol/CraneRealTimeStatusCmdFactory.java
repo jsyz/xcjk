@@ -2,6 +2,7 @@ package com.yz.protocol;
 
 import org.apache.mina.core.session.IoSession;
 
+import com.yz.action.CraneAction;
 import com.yz.mina.CmdFactoryBase;
 import com.yz.mina.CommandBase;
 import com.yz.mina.ICmdParser;
@@ -66,8 +67,8 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 			System.out.println("the flag2 is " + a);
 		}
 
-		// 保存塔基信息
-		Crane crane = new Crane();
+		//获取塔基实时数据
+		Crane crane = CraneAction.craneRealTime;
 
 		crane.setLiftingCapacity(String.valueOf(liftingData[0]));
 		crane.setLiftingHeight(String.valueOf(liftingData[1]));
@@ -80,7 +81,7 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		crane.setRatedCapacity(String.valueOf(liftingData[8]));
 		crane.setCapacityPercent(String.valueOf(liftingData[9]));
 		
-		crane.setWeightWarning(flag1[0]);
+		/*crane.setWeightWarning(flag1[0]);
 		crane.setHeightWarning(flag1[1]);
 		crane.setWidthWarning(flag1[2]);
 		crane.setAngleWarning(flag1[3]);
@@ -95,7 +96,7 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		crane.setAngleAlarm(flag2[4]);
 		crane.setWindAlarm(flag2[5]);
 		crane.setInclinationAlarm(flag2[6]);
-		crane.setAntiCollisionAlarm(flag2[7]);
+		crane.setAntiCollisionAlarm(flag2[7]);*/
 		
 		//serviceUtil.addObject(Object_type.CRANE, crane);
 

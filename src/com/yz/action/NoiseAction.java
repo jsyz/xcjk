@@ -1,11 +1,16 @@
 package com.yz.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -14,14 +19,14 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yz.model.Dust;
-import com.yz.service.IDustService;
+import com.yz.model.Noise;
+import com.yz.service.INoiseService;
 
-@Component("dustAction")
-public class DustAciton extends ActionSupport implements RequestAware,
+@Component("noiseAction")
+public class NoiseAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 	/**
-	 * 塔基
+	 * 扬尘
 	 */
 	private static final long serialVersionUID = 1L;
 	Map<String, Object> request;
@@ -39,56 +44,77 @@ public class DustAciton extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 
-	private IDustService dustService;
-	private Dust dust;
-	private List<Dust> dusts;
+	private INoiseService noiseService;
+	private Noise noise;
+	private List<Noise> noises;
+
+	public static Noise noiseRealTime = new Noise();
+
+	/*
+	 * 实时数据
+	 */
+	public String realtimeNoise() {
+		
+		JSONObject jsonObject = JSONObject.fromObject(noiseRealTime);
+		// System.out.println(jsonObject.toString());
+		PrintWriter out;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			out.print(jsonObject);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return NONE;
+	}
 
 	public String list() throws Exception {
 		// 判断会话是否失效
 		// 总记录数
-
 		int projectId = 1;
 
-		totalCount = dustService.getTotalCount(con, convalue, projectId);
+		totalCount = noiseService.getTotalCount(con, convalue, projectId);
 		// 总页数
-		pageCount = dustService.getPageCount(totalCount, size);
+		pageCount = noiseService.getPageCount(totalCount, size);
 		if (page > pageCount && pageCount != 0) {
 			page = pageCount;
 		}
 		// 所有当前页记录对象
-		dusts = dustService.queryList(con, convalue, projectId, page, size);
+		noises = noiseService.queryList(con, convalue, projectId, page, size);
 		return "list";
 	}
 
 	public String listline() throws Exception {
 
-		dusts = dustService.getDusts();
+		noises = noiseService.getNoises();
 		return "line";
 	}
 
-	public IDustService getDustService() {
-		return dustService;
+	public INoiseService getNoiseService() {
+		return noiseService;
 	}
 
 	@Resource
-	public void setDustService(IDustService dustService) {
-		this.dustService = dustService;
+	public void setNoiseService(INoiseService noiseService) {
+		this.noiseService = noiseService;
 	}
 
-	public Dust getDust() {
-		return dust;
+	public Noise getNoise() {
+		return noise;
 	}
 
-	public void setDust(Dust dust) {
-		this.dust = dust;
+	public void setNoise(Noise noise) {
+		this.noise = noise;
 	}
 
-	public List<Dust> getDusts() {
-		return dusts;
+	public List<Noise> getNoises() {
+		return noises;
 	}
 
-	public void setDusts(List<Dust> dusts) {
-		this.dusts = dusts;
+	public void setNoises(List<Noise> noises) {
+		this.noises = noises;
 	}
 
 	public void setRequest(Map<String, Object> request) {

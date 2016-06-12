@@ -11,7 +11,7 @@
 		<link href="css/Kentucky.css" rel="stylesheet" type="text/css" />
 		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
 			type="text/css" />
-		<title>空白页</title>
+		<title>塔基</title>
 	</head>
 	<body>
 		<div class="xmWraper">
@@ -113,6 +113,7 @@
 
 $(function () {
     $('#container').highcharts({
+    	setInterval("ShowLights()",250);
         title: {
             text: '塔基故障记录',
             x: -20 //center
@@ -229,6 +230,25 @@ $(function () {
         }]
     });
 });
+
+function ShowLights(){
+				  $.ajax({   
+				            url:'realtimeCrane',//这里是你的action或者servlert的路径地址   
+				            type:'get', //数据发送方式   
+				            dataType:'json', //接受数据格式 (这里有很多,常用的有html,xml,js,json)   
+				            error: function(msg)
+				            { //失败   
+				            	console.log('Error loading document');   
+				            },   
+				            success: function(msg)
+				            { //成功   
+				             if(msg!=null)
+				             {
+				             	console.log(msg);
+				             }
+				            }  
+		            });        	 
+		}
 						
 </script>
 	</body>

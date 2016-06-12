@@ -1,11 +1,15 @@
 package com.yz.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -14,14 +18,15 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.yz.model.Lift;
 import com.yz.model.Noise;
-import com.yz.service.INoiseService;
+import com.yz.service.ILiftService;
 
-@Component("noiseAction")
-public class NoiseAciton extends ActionSupport implements RequestAware,
+@Component("liftAction")
+public class LiftAction extends ActionSupport implements RequestAware,
 		SessionAware, ServletResponseAware, ServletRequestAware {
 	/**
-	 * 扬尘
+	 * 升降机
 	 */
 	private static final long serialVersionUID = 1L;
 	Map<String, Object> request;
@@ -39,56 +44,77 @@ public class NoiseAciton extends ActionSupport implements RequestAware,
 	private int con;
 	private String convalue;
 
-	private INoiseService noiseService;
-	private Noise noise;
-	private List<Noise> noises;
+	private ILiftService liftService;
+	private Lift lift;
+	private List<Lift> lifts;
+	
+	public static Lift liftRealTime = new Lift();
+	
+	
+	/*
+	 * 实时数据
+	 */
+	public String realtimeLift() {
+		
+		JSONObject jsonObject = JSONObject.fromObject(liftRealTime);
+		// System.out.println(jsonObject.toString());
+		PrintWriter out;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			out.print(jsonObject);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return NONE;
+	}
 
 	public String list() throws Exception {
 		// 判断会话是否失效
 		// 总记录数
 
-		int projectId = 1;
-
-		totalCount = noiseService.getTotalCount(con, convalue, projectId);
-		// 总页数
-		pageCount = noiseService.getPageCount(totalCount, size);
-		if (page > pageCount && pageCount != 0) {
-			page = pageCount;
-		}
-		// 所有当前页记录对象
-		noises = noiseService.queryList(con, convalue, projectId, page, size);
+		/*
+		 * int projectId = 1;
+		 * 
+		 * totalCount = liftService.getTotalCount(con, convalue, projectId); //
+		 * 总页数 pageCount =liftService.getPageCount(totalCount, size); if (page >
+		 * pageCount && pageCount != 0) { page = pageCount; } // 所有当前页记录对象 lifts =
+		 * liftService.queryList(con, convalue, projectId, page, size);
+		 */
 		return "list";
 	}
 
 	public String listline() throws Exception {
 
-		noises = noiseService.getNoises();
+		lifts = liftService.getLifts();
 		return "line";
 	}
 
-	public INoiseService getNoiseService() {
-		return noiseService;
+	public ILiftService getLiftService() {
+		return liftService;
 	}
 
 	@Resource
-	public void setNoiseService(INoiseService noiseService) {
-		this.noiseService = noiseService;
+	public void setLiftService(ILiftService liftService) {
+		this.liftService = liftService;
 	}
 
-	public Noise getNoise() {
-		return noise;
+	public Lift getLift() {
+		return lift;
 	}
 
-	public void setNoise(Noise noise) {
-		this.noise = noise;
+	public void setLift(Lift lift) {
+		this.lift = lift;
 	}
 
-	public List<Noise> getNoises() {
-		return noises;
+	public List<Lift> getLifts() {
+		return lifts;
 	}
 
-	public void setNoises(List<Noise> noises) {
-		this.noises = noises;
+	public void setLifts(List<Lift> lifts) {
+		this.lifts = lifts;
 	}
 
 	public void setRequest(Map<String, Object> request) {

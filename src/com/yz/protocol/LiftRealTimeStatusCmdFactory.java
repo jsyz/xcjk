@@ -2,6 +2,7 @@ package com.yz.protocol;
 
 import org.apache.mina.core.session.IoSession;
 
+import com.yz.action.LiftAction;
 import com.yz.mina.CmdFactoryBase;
 import com.yz.mina.CommandBase;
 import com.yz.mina.ICmdParser;
@@ -46,7 +47,10 @@ public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements
 			System.out.println("the flag1 is " + a);
 		}
 
-		Lift lift = new Lift();
+		//获得升降机实时数据
+		Lift lift =  LiftAction.liftRealTime;
+		
+		
 
 		lift.setHoistingAlarm(flag1[0]);
 		lift.setSquattingAlarm(flag1[1]);

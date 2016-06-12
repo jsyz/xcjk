@@ -2,6 +2,7 @@ package com.yz.protocol;
 
 import org.apache.mina.core.session.IoSession;
 
+import com.yz.action.DustAction;
 import com.yz.mina.CmdFactoryBase;
 import com.yz.mina.CommandBase;
 import com.yz.mina.ICmdParser;
@@ -39,13 +40,13 @@ public class DustDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 		
 		int dustData = ((data[3]&0xff)<<8) +(data[4]&0xff);
 		
-		//保存扬尘数据 
-		Dust dust = new Dust();
+		//获取实时状态扬尘
+		Dust dust = DustAction.dustRealTime;
 		dust.setDTUnumber(DTUnumber);
 		dust.setData(dustData+"");
 		
 		
-		serviceUtil.addObject(Object_type.DUST, dust);
+		//serviceUtil.addObject(Object_type.DUST, dust);
 		
 		
 		//float airLevel = (float) ((data[5]&0xff)/(10.0));
