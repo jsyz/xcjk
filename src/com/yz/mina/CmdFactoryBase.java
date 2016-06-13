@@ -120,7 +120,7 @@ public class CmdFactoryBase implements ICmdParser {
 			}
 		}
 
-		if (data[1] == 0x04 && data[2] == 0x04) {
+		if (data[1] == 0x04 && data[2] == 0x02) {
 			return MONITOR_CMD_TYPE.valueOf(4);
 		}
 

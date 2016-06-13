@@ -57,7 +57,7 @@ public class DustAction extends ActionSupport implements RequestAware,
 	public String realtimeDust() {
 		
 		JSONObject jsonObject = JSONObject.fromObject(dustRealTime);
-		// System.out.println(jsonObject.toString());
+		 System.out.println(jsonObject.toString());
 		PrintWriter out;
 		try {
 			response.setCharacterEncoding("UTF-8");

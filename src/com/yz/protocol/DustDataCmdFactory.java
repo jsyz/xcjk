@@ -12,7 +12,7 @@ import com.yz.vo.Object_type;
 
 public class DustDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 
-	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
+//	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
 	
 	public DustDataCmdFactory(byte[] data) {
 		super(data);
@@ -40,6 +40,7 @@ public class DustDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 		
 		int dustData = ((data[3]&0xff)<<8) +(data[4]&0xff);
 		
+		System.out.println(dustData);
 		//获取实时状态扬尘
 		Dust dust = DustAction.dustRealTime;
 		dust.setDTUnumber(DTUnumber);
