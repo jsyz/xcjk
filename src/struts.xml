@@ -45,7 +45,7 @@
 	</package>
 
 	<package name="dust_ajax" extends="json-default">
-		<action name="realtimeDust" class="dustAction" method="realtime">
+		<action name="realtimeDust" class="dustAction" method="realtimeDust">
 			<result type="json">
 				<param name="excludeNullProperties">true</param>
 			</result>
@@ -85,7 +85,7 @@
 	</package>
 
 	<package name="crane_ajax" extends="json-default">
-		<action name="realtimeCrane" class="craneAction" method="realtime">
+		<action name="realtimeCrane" class="craneAction" method="realtimeCrane">
 			<result type="json">
 				<param name="excludeNullProperties">true</param>
 			</result>
@@ -126,7 +126,7 @@
 	</package>
 
 	<package name="noise_ajax" extends="json-default">
-		<action name="realtimeNoise" class="noiseAction" method="realtime">
+		<action name="realtimeNoise" class="noiseAction" method="realtimeNoise">
 			<result type="json">
 				<param name="excludeNullProperties">true</param>
 			</result>
@@ -165,7 +165,7 @@
 		</action>
 	</package>
 	<package name="lift_ajax" extends="json-default">
-		<action name="realtimeLift" class="liftAction" method="realtime">
+		<action name="realtimeLift" class="liftAction" method="realtimeLift">
 			<result type="json">
 				<param name="excludeNullProperties">true</param>
 			</result>

@@ -49,24 +49,26 @@ public class DustAction extends ActionSupport implements RequestAware,
 	private List<Dust> dusts;
 
 	public static Dust dustRealTime = new Dust();
-	
-	
+
 	/*
 	 * 实时数据
 	 */
 	public String realtimeDust() {
-		
-		JSONObject jsonObject = JSONObject.fromObject(dustRealTime);
-		// System.out.println(jsonObject.toString());
-		PrintWriter out;
-		try {
-			response.setCharacterEncoding("UTF-8");
-			out = response.getWriter();
-			out.print(jsonObject);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		System.out.println("hello world");
+		if (dustRealTime != null) {
+			JSONObject jsonObject = JSONObject.fromObject(dustRealTime);
+			// System.out.println(jsonObject.toString());
+			PrintWriter out;
+			try {
+				response.setCharacterEncoding("UTF-8");
+				out = response.getWriter();
+				out.print(jsonObject);
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return NONE;
 	}
