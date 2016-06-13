@@ -16,7 +16,7 @@
   <div class="xmconbox">
     <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
   <div id="container" style="min-width:450px;height:230px; border:1px solid #09F"></div>
-<div style="font-size:80px; text-align:center;;">实时数据=45粒/m³</div>
+<div style="font-size:80px; text-align:center;;">实时数据=<span id="data">45</span>千粒/升</div>
 </div>
 </div>
   
@@ -32,7 +32,7 @@
 <script type="text/javascript">
 
 $(function () {
-	setInterval("ShowLights()",250);
+	setInterval("ShowLights()",3000);
     $('#container').highcharts({
         title: {
             text: '扬尘数据',
@@ -46,7 +46,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: '粒/m³'
+                text: '千粒/升'
             },
             plotLines: [{
                 value: 0,
@@ -55,7 +55,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: '粒'
+            valueSuffix: '千粒'
         },
         legend: {
             layout: 'vertical',
@@ -77,7 +77,6 @@ function ShowLights(){
 				            dataType:'json', //接受数据格式 (这里有很多,常用的有html,xml,js,json)   
 				            error: function(msg)
 				            { //失败   
-				            	console.log('Error loading document');   
 				            },   
 				            success: function(msg)
 				            { //成功   

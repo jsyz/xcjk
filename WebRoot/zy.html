@@ -40,7 +40,7 @@
 		<script type="text/javascript">
 
 $(function () {
-	setInterval("ShowLights()",250);
+	setInterval("ShowLights()",30000);
     $('#container').highcharts({
         title: {
             text: '噪音数据',
@@ -86,7 +86,6 @@ function ShowLights(){
 				            dataType:'json', //接受数据格式 (这里有很多,常用的有html,xml,js,json)   
 				            error: function(msg)
 				            { //失败   
-				            	console.log('Error loading document');   
 				            },   
 				            success: function(msg)
 				            { //成功   
