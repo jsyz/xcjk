@@ -2,6 +2,7 @@ package com.yz.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -53,26 +54,29 @@ public class DustAction extends ActionSupport implements RequestAware,
 	/*
 	 * 实时数据
 	 */
-	public String realtimeDust() {
+	public String realtimeDust() throws Exception {
 
-			
-			if(dustRealTime != null&&dustRealTime.getData()!=null)
-			{
-				DustJson dustJson = new DustJson();
-				dustJson.setData(dustRealTime.getData());
-				JSONObject jsonObject = JSONObject.fromObject(dustJson);
-				
-				PrintWriter out;
-				try {
-					response.setCharacterEncoding("UTF-8");
-					out = response.getWriter();
-					out.print(jsonObject);
-					out.flush();
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+		DustJson dustJson = new DustJson();
+		if (dustRealTime != null && dustRealTime.getData() != null) {
+
+			DecimalFormat df = new DecimalFormat("######0.00");
+			double dataDouble = Double.parseDouble(dustRealTime.getData());
+			dataDouble = dataDouble / 10d;
+			df.format(dataDouble);
+
+			dustJson.setData(dataDouble + "");
+
+		} else {
+			dustJson.setData("-1");
+		}
+		
+		JSONObject jsonObject = JSONObject.fromObject(dustJson);
+		PrintWriter out;
+		response.setCharacterEncoding("UTF-8");
+		out = response.getWriter();
+		out.print(jsonObject);
+		out.flush();
+		out.close();
 		return NONE;
 	}
 

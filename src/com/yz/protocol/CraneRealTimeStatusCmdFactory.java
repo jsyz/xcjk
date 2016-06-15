@@ -69,17 +69,18 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 
 		//获取塔基实时数据
 		Crane crane = CraneAction.craneRealTime;
+		
 
-		crane.setLiftingCapacity(String.valueOf(liftingData[0]));
-		crane.setLiftingHeight(String.valueOf(liftingData[1]));
-		crane.setLuffingWidth(String.valueOf(liftingData[2]));
-		crane.setRotationAngle(String.valueOf(liftingData[3]));
-		crane.setRatedTorque(String.valueOf(liftingData[4]));
-		crane.setSlope(String.valueOf(liftingData[5]));
-		crane.setWindVelocity(String.valueOf(liftingData[6]));
-		crane.setTorquePercent(String.valueOf(liftingData[7]));
-		crane.setRatedCapacity(String.valueOf(liftingData[8]));
-		crane.setCapacityPercent(String.valueOf(liftingData[9]));
+		crane.setLiftingCapacity(handleStringDecimal(String.valueOf(liftingData[0])));
+		crane.setLiftingHeight(handleStringDecimal(String.valueOf(liftingData[1])));
+		crane.setLuffingWidth(handleStringDecimal(String.valueOf(liftingData[2])));
+		crane.setRotationAngle(handleStringDecimal(String.valueOf(liftingData[3])));
+		crane.setRatedTorque(handleStringDecimal(String.valueOf(liftingData[4])));
+		crane.setSlope(handleStringDecimal(String.valueOf(liftingData[5])));
+		crane.setWindVelocity(handleStringDecimal(String.valueOf(liftingData[6])));
+		crane.setTorquePercent(handleStringDecimal(String.valueOf(liftingData[7])));
+		crane.setRatedCapacity(handleStringDecimal(String.valueOf(liftingData[8])));
+		crane.setCapacityPercent(handleStringDecimal(String.valueOf(liftingData[9])));
 		
 		/*crane.setWeightWarning(flag1[0]);
 		crane.setHeightWarning(flag1[1]);
@@ -100,6 +101,25 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		
 		//serviceUtil.addObject(Object_type.CRANE, crane);
 
+	}
+
+	private String handleStringDecimal(String msg) {
+		
+		if(msg.contains("."))
+		{
+			int index = msg.indexOf(".");
+			
+			System.out.println("index is"+index);
+			
+			String msgHandle = msg.substring(index+1);
+			
+			if(msgHandle.length()>3)
+			{
+				msg = msg.substring(0, index+3);
+			}
+			
+		}
+		return msg;
 	}
 
 	@Override

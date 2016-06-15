@@ -54,8 +54,11 @@ public class CraneAction extends ActionSupport implements RequestAware,
 	 */
 	public String realtimeCrane() {
 
+		
+		
+		
 		JSONObject jsonObject = JSONObject.fromObject(craneRealTime);
-		// System.out.println(jsonObject.toString());
+		
 		PrintWriter out;
 		try {
 			response.setCharacterEncoding("UTF-8");
