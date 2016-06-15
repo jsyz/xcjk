@@ -29,8 +29,24 @@ public class bytetofloat {
 	}
 
 	public static void main(String[] args) throws IOException {
-		byte[] b = { 0x41, (byte) 0xc8, 0, 0 };
-		System.out.println(bytes2float(b));
+
+		byte[] a = new byte[] { 0x37, 0x30, 0x2E, 0x37 };
+
+		char[] b = new char[4];
+
+		String nRcvString;
+
+		StringBuffer tStringBuf = new StringBuffer();
+		for (int i = 0; i < 4; i++) {
+			b[i] = (char) a[i];
+		}
+		tStringBuf.append(b);
+		nRcvString = tStringBuf.toString();
+
+		System.out.print("the resultis +" + nRcvString + "$$"+a.length);
+		// byte[] b = { 0x41, (byte) 0xc8, 0, 0 };
+		// byte[] c = { 0x56 ,(byte) 0x41, (byte)0xfc, (byte)0x0f };
+		// System.out.println(bytes2float(c));
 
 	}
 }

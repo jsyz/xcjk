@@ -18,9 +18,9 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yz.model.Crane;
 import com.yz.model.Dust;
 import com.yz.service.IDustService;
+import com.yz.vo.DustJson;
 
 @Component("dustAction")
 public class DustAction extends ActionSupport implements RequestAware,
@@ -55,21 +55,24 @@ public class DustAction extends ActionSupport implements RequestAware,
 	 */
 	public String realtimeDust() {
 
-		System.out.println("hello world");
-		if (dustRealTime != null) {
-			JSONObject jsonObject = JSONObject.fromObject(dustRealTime);
-			// System.out.println(jsonObject.toString());
-			PrintWriter out;
-			try {
-				response.setCharacterEncoding("UTF-8");
-				out = response.getWriter();
-				out.print(jsonObject);
-				out.flush();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			
+			if(dustRealTime != null&&dustRealTime.getData()!=null)
+			{
+				DustJson dustJson = new DustJson();
+				dustJson.setData(dustRealTime.getData());
+				JSONObject jsonObject = JSONObject.fromObject(dustJson);
+				
+				PrintWriter out;
+				try {
+					response.setCharacterEncoding("UTF-8");
+					out = response.getWriter();
+					out.print(jsonObject);
+					out.flush();
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-		}
 		return NONE;
 	}
 

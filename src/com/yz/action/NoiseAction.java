@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.RequestAware;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yz.model.Noise;
 import com.yz.service.INoiseService;
+import com.yz.vo.NoiseJson;
 
 @Component("noiseAction")
 public class NoiseAction extends ActionSupport implements RequestAware,
@@ -55,19 +55,25 @@ public class NoiseAction extends ActionSupport implements RequestAware,
 	 */
 	public String realtimeNoise() {
 		
-		JSONObject jsonObject = JSONObject.fromObject(noiseRealTime);
-		// System.out.println(jsonObject.toString());
-		PrintWriter out;
-		try {
-			response.setCharacterEncoding("UTF-8");
-			out = response.getWriter();
-			out.print(jsonObject);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		System.out.println("noise data:"+noiseRealTime.getData());
+		if(noiseRealTime != null&&noiseRealTime.getData()!=null)
+		{
+			NoiseJson noiseJson = new NoiseJson();
+			noiseJson.setData(noiseJson.getData());
+			JSONObject jsonObject = JSONObject.fromObject(noiseJson);
+			
+			PrintWriter out;
+			try {
+				response.setCharacterEncoding("UTF-8");
+				out = response.getWriter();
+				out.print(jsonObject);
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		return NONE;
+		return null;
 	}
 
 	public String list() throws Exception {

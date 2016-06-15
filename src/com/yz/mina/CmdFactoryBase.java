@@ -76,6 +76,12 @@ public class CmdFactoryBase implements ICmdParser {
 	public static MONITOR_CMD_TYPE getCommandType(byte[] data) {
 
 		// int command = data[7] & 0xFF;
+		
+		if(data[0] == 0x21){
+			//noise
+			return MONITOR_CMD_TYPE.valueOf(5);
+		}
+		
 		if (data[0] == 0x41) {
 			byte tmpbytes[] = new byte[] { 0x41, 0x41, 0x41, 0x41 };
 
@@ -104,7 +110,7 @@ public class CmdFactoryBase implements ICmdParser {
 			}
 
 			if (tmp_sum == 4) {
-				return MONITOR_CMD_TYPE.valueOf(5);
+				return MONITOR_CMD_TYPE.valueOf(0);
 			}
 		}
 

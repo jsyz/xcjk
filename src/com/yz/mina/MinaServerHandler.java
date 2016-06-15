@@ -24,7 +24,7 @@ public class MinaServerHandler implements IoHandler {
 	public void messageReceived(IoSession session, Object message)
 			throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("enter messageReceived "
+		System.out.println("enter messageReceived from "+session.getRemoteAddress().toString()+":"
 				+ DataConvertor.bytesToHexString(DataConvertor
 						.toByteArray(message)));
 		CmdFactoryBase cmdFactory = CmdFactoryBase.SelectCmdFactory(session,

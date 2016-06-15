@@ -5,6 +5,24 @@ import org.apache.mina.core.buffer.IoBuffer;
 
 
 public class DataConvertor {
+	
+	public static String toAsciiString(byte [] data,int offset, int length){
+		
+		char[] temp = new char[length];
+		
+		String nRcvString;
+
+		StringBuffer tStringBuf = new StringBuffer();
+		
+		for (int i = 0; i < length; i++) {
+			temp[i] = (char) data[i+offset];
+		}
+		tStringBuf.append(temp);
+		nRcvString = tStringBuf.toString();
+		return nRcvString;
+		
+	}
+	
 	public static byte[] toByteArray (Object obj) {      
 		
 	             

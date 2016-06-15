@@ -43,7 +43,7 @@ public class DtuHeartBeatCmdFactory extends CmdFactoryBase implements
 
 			send[0] = (byte) sendOne;
 			send[1] = 0x04;
-			send[5] = 0x02;
+			send[5] = 0x01;
 
 			int crc = CRC16.calcCrc16(send, 0, 6);
 
@@ -60,10 +60,10 @@ public class DtuHeartBeatCmdFactory extends CmdFactoryBase implements
 			int sendOne = Integer.valueOf(temp);
 			noise_send[0] = (byte) sendOne;
 			noise_send[1] = 0x07;
-			int crc = CRC16.calcCrc16(noise_send, 0, 6);
-
-			noise_send[2] = (byte) ((crc & 0xff00) >> 8);
-			noise_send[3] = (byte) (crc & 0x00ff);
+//			int crc = CRC16.calcCrc16(noise_send, 0, 6);
+//
+//			noise_send[2] = (byte) ((crc & 0xff00) >> 8);
+//			noise_send[3] = (byte) (crc & 0x00ff);
 
 			session.write(IoBuffer.wrap(noise_send));
 			
@@ -74,24 +74,24 @@ public class DtuHeartBeatCmdFactory extends CmdFactoryBase implements
 	public void Process(IoSession session, CommandBase cmd) throws Exception {
 		// TODO Auto-generated method stub
 
-		if (cmd.getCmdType() == this.expected_cmd) {
-
-			String Reply_cmd = "FF FF FF FF 01 F0 9F 00 00 08 01 98";
-			String[] cmds = Reply_cmd.split(" ");
-			byte[] aaa = new byte[cmds.length];
-			int i = 0;
-			for (String b : cmds) {
-				if (b.equals("FF")) {
-					aaa[i++] = -1;
-				} else {
-					aaa[i++] = Integer.valueOf(b, 16).byteValue();
-					;
-				}
-			}
-			session.write(IoBuffer.wrap(aaa));
+//		if (cmd.getCmdType() == this.expected_cmd) {
+//
+//			String Reply_cmd = "FF FF FF FF 01 F0 9F 00 00 08 01 98";
+//			String[] cmds = Reply_cmd.split(" ");
+//			byte[] aaa = new byte[cmds.length];
+//			int i = 0;
+//			for (String b : cmds) {
+//				if (b.equals("FF")) {
+//					aaa[i++] = -1;
+//				} else {
+//					aaa[i++] = Integer.valueOf(b, 16).byteValue();
+//					;
+//				}
+//			}
+//			session.write(IoBuffer.wrap(aaa));
 
 			OnAfter_Ack(session, cmd);
-		}
+		//}
 	}
 
 }

@@ -14,7 +14,7 @@ import com.yz.vo.Object_type;
 public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		ICmdParser {
 
-	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
+//	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
 
 	public CraneRealTimeStatusCmdFactory(byte[] data) {
 		super(data);
