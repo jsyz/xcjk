@@ -53,17 +53,29 @@ public class LiftAttendanceCmdFactory extends CmdFactoryBase implements
 
 	private void upload_LiftAttendance(byte[] data, IoSession session) {
 		// TODO Auto-generated method stub
-		System.out.println("考勤数据有了");
 
-		byte[] b_driveId = new byte[18];
+		if (data[4] == 0x03) {
 
-		for (int i = 0; i < 18; i++) {
-			b_driveId[i] = data[i + 12];
+			byte[] b_driveId = new byte[18];
+
+			for (int i = 0; i < 18; i++) {
+				b_driveId[i] = data[i + 12];
+			}
+
+			String s_driveId = DataConvertor.toString(b_driveId);
+
+			System.out.println("the s_driveId is " + s_driveId);
+		}else if(data[4] == 0x04){
+			byte[] b_driveId = new byte[18];
+
+			for (int i = 0; i < 18; i++) {
+				b_driveId[i] = data[i + 12];
+			}
+
+			String s_driveId = DataConvertor.toString(b_driveId);
+
+			System.out.println(" 考勤数据是 " + s_driveId);
 		}
-
-		String s_driveId = DataConvertor.toString(b_driveId);
-
-		System.out.println("the s_driveId is " + s_driveId);
 
 	}
 
