@@ -16,7 +16,7 @@
   <div class="xmconbox">
     <div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
   <div id="container" style="min-width:450px;height:230px; border:1px solid #09F"></div>
-<div style="font-size:80px; text-align:center;;">实时数据=<span id="data">45</span>千粒/升</div>
+<div style="font-size:80px; text-align:center;;">实时数据=<span id="data"></span></div>
 </div>
 </div>
   
@@ -65,7 +65,7 @@ $(function () {
         },
         series: [{
             name: '实时数据',
-            data: [26, 35, 29, 20, 19, 27, 29, 39, 70, 26, 24, 16]
+            data: [1.9, 2.1, 1.8, 2.3, 2.1, 2.2, 2.3, 2.4, 1.9, 2.0, 2.1, 1.7]
         }]
     });
 });
@@ -76,13 +76,19 @@ function ShowLights(){
 				            type:'get', //数据发送方式   
 				            dataType:'json', //接受数据格式 (这里有很多,常用的有html,xml,js,json)   
 				            error: function(msg)
-				            { //失败   
+				            { //失败  
 				            },   
 				            success: function(msg)
 				            { //成功   
 				             if(msg!=null)
 				             {
-				             	console.log(msg);
+				             	if(msg.data=="-1")
+				             	{
+				             		$("#data").text("暂无数据");
+				             	}else
+				             	{
+				             		$("#data").text(msg.data+"千粒/升");
+				             	}
 				             }
 				            }  
 		            });        	 

@@ -56,34 +56,34 @@
 						<tbody>
 							<tr class="text-c">
 								<td>
-									15
+									<span id="liftingCapacity">0</span>
 								</td>
 								<td>
-									25
+									<span id="liftingHeight">0</span>
 								</td>
 								<td>
-									25
+									<span id="luffingWidth">0</span>
 								</td>
 								<td>
-									300
+									<span id="rotationAngle">0</span>
 								</td>
 								<td>
-									60
+									<span id="ratedTorque">0</span>
 								</td>
 								<td>
-									230
+									<span id="slope">0</span>
 								</td>
 								<td>
-									450
+									<span id="windVelocity">0</span>
 								</td>
 								<td>
-									35
+									<span id="torquePercent">0</span>
 								</td>
 								<td>
-									50
+									<span id="ratedCapacity">0</span>
 								</td>
 								<td>
-									23
+									<span id="capacityPercent">0</span>
 								</td>
 							</tr>
 						</tbody>
@@ -112,7 +112,7 @@
 		<script type="text/javascript">
 
 $(function () {
-	setInterval("ShowLights()",30000);
+	setInterval("ShowLights()",3000);
     $('#container').highcharts({
     
         title: {
@@ -244,7 +244,18 @@ function ShowLights(){
 				            { //成功   
 				             if(msg!=null)
 				             {
-				             	console.log(msg);
+				             	
+			             		$("#liftingCapacity").text(msg.liftingCapacity);
+			             		$("#liftingHeight").text(msg.liftingHeight);
+			             		$("#luffingWidth").text(msg.luffingWidth);
+			             		$("#rotationAngle").text(msg.rotationAngle);
+			             		$("#ratedTorque").text(msg.ratedTorque);
+			             		$("#slope").text(msg.slope);
+			             		$("#windVelocity").text(msg.windVelocity);
+			             		$("#torquePercent").text(msg.torquePercent);
+			             		$("#ratedCapacity").text(msg.ratedCapacity);
+			             		$("#capacityPercent").text(msg.capacityPercent);
+				             	
 				             }
 				            }  
 		            });        	 

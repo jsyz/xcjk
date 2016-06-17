@@ -53,26 +53,33 @@ public class NoiseAction extends ActionSupport implements RequestAware,
 	/*
 	 * 实时数据
 	 */
-	public String realtimeNoise() {
-		
-		System.out.println("noise data:"+noiseRealTime.getData());
-		if(noiseRealTime != null&&noiseRealTime.getData()!=null)
-		{
-			NoiseJson noiseJson = new NoiseJson();
-			noiseJson.setData(noiseJson.getData());
-			JSONObject jsonObject = JSONObject.fromObject(noiseJson);
+	public String realtimeNoise() throws Exception {
+
+		NoiseJson noiseJson = new NoiseJson();
+		if (noiseRealTime != null && noiseRealTime.getData() != null) {
 			
-			PrintWriter out;
-			try {
-				response.setCharacterEncoding("UTF-8");
-				out = response.getWriter();
-				out.print(jsonObject);
-				out.flush();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			String noiseData = noiseRealTime.getData();
+			
+			if(noiseData.substring(0,1).equals("0"))
+			{
+				noiseData = noiseData.substring(1);
 			}
+			
+			noiseJson.setData(noiseData);
+			
+			
+		} else {
+			noiseJson.setData("-1");
 		}
+
+		JSONObject jsonObject = JSONObject.fromObject(noiseJson);
+
+		PrintWriter out;
+		response.setCharacterEncoding("UTF-8");
+		out = response.getWriter();
+		out.print(jsonObject);
+		out.flush();
+		out.close();
 		return null;
 	}
 
