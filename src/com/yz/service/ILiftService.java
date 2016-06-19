@@ -35,4 +35,6 @@ public interface ILiftService {
 	public abstract List<Lift> queryList(int con, String convalue,
 			Lift lift, int page, int size);
 
+	public abstract List<Lift> getLiftsByAttendance();
+
 }

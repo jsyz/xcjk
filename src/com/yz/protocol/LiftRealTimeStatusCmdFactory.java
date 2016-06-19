@@ -1,6 +1,8 @@
 package com.yz.protocol;
 
 import org.apache.mina.core.session.IoSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.yz.action.LiftAction;
 import com.yz.mina.CmdFactoryBase;
@@ -13,10 +15,12 @@ import com.yz.vo.Object_type;
 public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		ICmdParser {
 
+	final static ApplicationContext ac = new ClassPathXmlApplicationContext(
+			"beans.xml");
+	final static SqlServiceUtil sqlServiceUtil = (SqlServiceUtil) ac
+			.getBean("sqlServiceUtil");
 	private String driverID;
 	private String operatingStatus;
-
-	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
 
 	public LiftRealTimeStatusCmdFactory(byte[] data) {
 		super(data);
@@ -47,10 +51,8 @@ public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements
 			System.out.println("the flag1 is " + a);
 		}
 
-		//获得升降机实时数据
-		Lift lift =  LiftAction.liftRealTime;
-		
-		
+		// 获得升降机实时数据
+		Lift lift = LiftAction.liftRealTime;
 
 		lift.setHoistingAlarm(flag1[0]);
 		lift.setSquattingAlarm(flag1[1]);
@@ -59,9 +61,8 @@ public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		lift.setSingleDoorError(flag1[4]);
 		lift.setDoubleDoorError(flag1[5]);
 		lift.setTopDoorError(flag1[6]);
-		
-		
-		serviceUtil.addObject(Object_type.LIFT, lift);
+
+		//sqlServiceUtil.addObject(Object_type.LIFT, lift);
 
 	}
 

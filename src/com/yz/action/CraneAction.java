@@ -53,9 +53,6 @@ public class CraneAction extends ActionSupport implements RequestAware,
 	 * 实时数据
 	 */
 	public String realtimeCrane() {
-
-		
-		
 		
 		JSONObject jsonObject = JSONObject.fromObject(craneRealTime);
 		

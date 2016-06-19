@@ -150,4 +150,9 @@ public class LiftServiceImp implements ILiftService {
 		return liftDao.pageList(queryString, p, page, size);
 	}
 
+	public List<Lift> getLiftsByAttendance() {
+		// TODO Auto-generated method stub
+		String queryString = "from Lift mo where 1=1 and mo.attendanceData!=null";
+		return liftDao.queryList(queryString);
+	}
 }

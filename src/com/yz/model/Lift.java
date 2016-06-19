@@ -17,6 +17,7 @@ public class Lift implements java.io.Serializable {
 	private Integer projectId;
 	private Integer DTUnumber;
 	private String attendanceData;
+	private String reportedTime;
 	
 	
 	private Boolean hoistingAlarm;//1：升降机冲顶报警 0：正常
@@ -132,5 +133,16 @@ public class Lift implements java.io.Serializable {
 	public void setTopDoorError(Boolean topDoorError) {
 		this.topDoorError = topDoorError;
 	}
+
+	public String getReportedTime() {
+		return reportedTime;
+	}
+
+	@Column(name = "reportedTime")
+	public void setReportedTime(String reportedTime) {
+		this.reportedTime = reportedTime;
+	}
+	
+	
 
 }

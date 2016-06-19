@@ -2,15 +2,26 @@ package com.yz.protocol;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.yz.mina.CmdFactoryBase;
 import com.yz.mina.CommandBase;
 import com.yz.mina.ICmdParser;
+import com.yz.model.Lift;
 import com.yz.utils.CRC16;
 import com.yz.utils.DataConvertor;
+import com.yz.utils.DateTimeKit;
+import com.yz.utils.SqlServiceUtil;
+import com.yz.vo.Object_type;
 
 public class LiftAttendanceCmdFactory extends CmdFactoryBase implements
 		ICmdParser {
+
+	final static ApplicationContext ac = new ClassPathXmlApplicationContext(
+			"beans.xml");
+	final static SqlServiceUtil sqlServiceUtil = (SqlServiceUtil) ac
+			.getBean("sqlServiceUtil");
 
 	public LiftAttendanceCmdFactory(byte[] data) {
 		super(data);
@@ -65,7 +76,7 @@ public class LiftAttendanceCmdFactory extends CmdFactoryBase implements
 			String s_driveId = DataConvertor.toString(b_driveId);
 
 			System.out.println("the s_driveId is " + s_driveId);
-		}else if(data[4] == 0x04){
+		} else if (data[4] == 0x04) {
 			byte[] b_driveId = new byte[18];
 
 			for (int i = 0; i < 18; i++) {
@@ -73,7 +84,19 @@ public class LiftAttendanceCmdFactory extends CmdFactoryBase implements
 			}
 
 			String s_driveId = DataConvertor.toString(b_driveId);
-
+			
+			if(s_driveId!=null&&s_driveId.length()>0)
+			{
+				Lift lift = new Lift();
+				lift.setAttendanceData(s_driveId);
+				lift.setReportedTime(DateTimeKit.getLocal_Time());
+				try {
+					sqlServiceUtil.addObject(Object_type.LIFT, lift);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("人员考勤添加失败");
+				}
+			}
 			System.out.println(" 考勤数据是 " + s_driveId);
 		}
 

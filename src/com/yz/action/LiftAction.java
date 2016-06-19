@@ -91,6 +91,14 @@ public class LiftAction extends ActionSupport implements RequestAware,
 		lifts = liftService.getLifts();
 		return "line";
 	}
+	
+	public String attendance() throws Exception {
+
+		lifts = liftService.getLiftsByAttendance();
+		
+		return "attendance";
+	}
+	
 
 	public ILiftService getLiftService() {
 		return liftService;
