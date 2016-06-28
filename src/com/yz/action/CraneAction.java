@@ -48,7 +48,8 @@ public class CraneAction extends ActionSupport implements RequestAware,
 	private List<Crane> cranes;
 
 	public static Crane craneRealTime = new Crane();
-
+	
+	
 	/*
 	 * 实时数据
 	 */

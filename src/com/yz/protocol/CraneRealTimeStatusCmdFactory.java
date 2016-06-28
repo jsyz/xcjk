@@ -1,12 +1,15 @@
 package com.yz.protocol;
 
 import org.apache.mina.core.session.IoSession;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.yz.action.CraneAction;
 import com.yz.mina.CmdFactoryBase;
 import com.yz.mina.CommandBase;
 import com.yz.mina.ICmdParser;
 import com.yz.model.Crane;
+import com.yz.utils.DateTimeKit;
 import com.yz.utils.SqlServiceUtil;
 import com.yz.utils.bytetofloat;
 import com.yz.vo.Object_type;
@@ -15,6 +18,9 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		ICmdParser {
 
 //	private SqlServiceUtil serviceUtil = SqlServiceUtil.getSqlServiceUtil();
+	final static ApplicationContext ac = new ClassPathXmlApplicationContext(
+	"beans.xml");
+	final static SqlServiceUtil sqlServiceUtil = (SqlServiceUtil) ac.getBean("sqlServiceUtil");
 
 	public CraneRealTimeStatusCmdFactory(byte[] data) {
 		super(data);
@@ -81,6 +87,14 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		crane.setTorquePercent(handleStringDecimal(String.valueOf(liftingData[7])));
 		crane.setRatedCapacity(handleStringDecimal(String.valueOf(liftingData[8])));
 		crane.setCapacityPercent(handleStringDecimal(String.valueOf(liftingData[9])));
+		crane.setReportedTime(DateTimeKit.getLocal_Time());
+		
+		try {
+			sqlServiceUtil.addObject(Object_type.LIFT, crane);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("塔基数据添加失败");
+		}
 		
 		/*crane.setWeightWarning(flag1[0]);
 		crane.setHeightWarning(flag1[1]);
