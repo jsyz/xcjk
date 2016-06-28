@@ -40,7 +40,7 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		float[] liftingData = new float[10];
 		for (int i = 0; i < 10; i++)
 			liftingData[i] = bytetofloat.bytes2float(data, begin + i * byteset,
-					byteset); // 起重量,起升高度,变幅幅度.....
+					byteset,1); // 起重量,起升高度,变幅幅度.....
 		for (float a : liftingData)
 			System.out.println("the Crane data is " + a);
 
