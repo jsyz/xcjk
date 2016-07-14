@@ -29,10 +29,8 @@
 		var data = new Array();
 		
 		<s:iterator value="dusts" var="dust" status="index">
-		
 				index.push(<s:property value="#index.count"/>);
 				data.push(<s:property value="data"/>);
-			
 		</s:iterator>
 		
 		

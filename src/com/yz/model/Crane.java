@@ -17,6 +17,7 @@ public class Crane implements java.io.Serializable {
 	private Integer id;
 	private Integer projectId;
 	private Integer DTUnumber;
+	private String reportedTime;
 
 
 	private String liftingCapacity; // 起重量
@@ -316,6 +317,17 @@ public class Crane implements java.io.Serializable {
 	public void setCapacityPercent(String capacityPercent) {
 		this.capacityPercent = capacityPercent;
 	}
+
+	@Column(name = "reportedTime",length =30 )
+	public String getReportedTime() {
+		return reportedTime;
+	}
+
+	public void setReportedTime(String reportedTime) {
+		this.reportedTime = reportedTime;
+	}
+	
+	
 
 	
 	
