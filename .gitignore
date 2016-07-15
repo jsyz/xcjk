@@ -9,7 +9,7 @@
 *.war
 *.ear
 /.settings
-/.classpath
+*.classpath
 .mymetadata
 .project
  /bin

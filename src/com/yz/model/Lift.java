@@ -16,25 +16,18 @@ public class Lift implements java.io.Serializable {
 	private Integer id;
 	private Integer projectId;
 	private Integer DTUnumber;
-	private String attendanceData;
+	private String attendanceData;// 考勤
 	private String reportedTime;
-	
-	
-	private Boolean hoistingAlarm;//1：升降机冲顶报警 0：正常
-	private Boolean squattingAlarm;//1：升降机蹲底报警 0：正常
+	private String switchRecord;// 升降机开关记录
 
-	private Boolean faceDetectionError;//1：人脸识别设备正被拆除 0：正常
-	private Boolean controlSignalError;//1：控制信号被短接 0：正常
-	private Boolean singleDoorError;//	1：单开门限位开关损坏 0：正常
-	private Boolean DoubleDoorError;//1：双开门限位开关损坏 0：正常
-	private Boolean topDoorError;//1：顶开门限位开关损坏 0：正常
-	
-	
-	
+	private Boolean hoistingAlarm;// 1：升降机冲顶报警 0：正常
+	private Boolean squattingAlarm;// 1：升降机蹲底报警 0：正常
 
-	
-	
-
+	private Boolean faceDetectionError;// 1：人脸识别设备正被拆除 0：正常
+	private Boolean controlSignalError;// 1：控制信号被短接 0：正常
+	private Boolean singleDoorError;// 1：单开门限位开关损坏 0：正常
+	private Boolean DoubleDoorError;// 1：双开门限位开关损坏 0：正常
+	private Boolean topDoorError;// 1：顶开门限位开关损坏 0：正常
 
 	public Lift() {
 
@@ -77,6 +70,16 @@ public class Lift implements java.io.Serializable {
 	public void setAttendanceData(String attendanceData) {
 		this.attendanceData = attendanceData;
 	}
+
+	@Column(name = "switchRecord", length = 30)
+	public String getSwitchRecord() {
+		return switchRecord;
+	}
+
+	public void setSwitchRecord(String switchRecord) {
+		this.switchRecord = switchRecord;
+	}
+
 	@Column(name = "hoistingAlarm")
 	public Boolean getHoistingAlarm() {
 		return hoistingAlarm;
@@ -85,6 +88,7 @@ public class Lift implements java.io.Serializable {
 	public void setHoistingAlarm(Boolean hoistingAlarm) {
 		this.hoistingAlarm = hoistingAlarm;
 	}
+
 	@Column(name = "squattingAlarm")
 	public Boolean getSquattingAlarm() {
 		return squattingAlarm;
@@ -93,6 +97,7 @@ public class Lift implements java.io.Serializable {
 	public void setSquattingAlarm(Boolean squattingAlarm) {
 		this.squattingAlarm = squattingAlarm;
 	}
+
 	@Column(name = "faceDetectionError")
 	public Boolean getFaceDetectionError() {
 		return faceDetectionError;
@@ -101,6 +106,7 @@ public class Lift implements java.io.Serializable {
 	public void setFaceDetectionError(Boolean faceDetectionError) {
 		this.faceDetectionError = faceDetectionError;
 	}
+
 	@Column(name = "controlSignalError")
 	public Boolean getControlSignalError() {
 		return controlSignalError;
@@ -109,6 +115,7 @@ public class Lift implements java.io.Serializable {
 	public void setControlSignalError(Boolean controlSignalError) {
 		this.controlSignalError = controlSignalError;
 	}
+
 	@Column(name = "singleDoorError")
 	public Boolean getSingleDoorError() {
 		return singleDoorError;
@@ -121,6 +128,7 @@ public class Lift implements java.io.Serializable {
 	public Boolean getDoubleDoorError() {
 		return DoubleDoorError;
 	}
+
 	@Column(name = "doubleDoorError")
 	public void setDoubleDoorError(Boolean doubleDoorError) {
 		DoubleDoorError = doubleDoorError;
@@ -129,6 +137,7 @@ public class Lift implements java.io.Serializable {
 	public Boolean getTopDoorError() {
 		return topDoorError;
 	}
+
 	@Column(name = "topDoorError")
 	public void setTopDoorError(Boolean topDoorError) {
 		this.topDoorError = topDoorError;
@@ -142,7 +151,5 @@ public class Lift implements java.io.Serializable {
 	public void setReportedTime(String reportedTime) {
 		this.reportedTime = reportedTime;
 	}
-	
-	
 
 }

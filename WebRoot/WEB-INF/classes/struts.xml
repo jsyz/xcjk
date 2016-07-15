@@ -156,7 +156,7 @@
 
 			<result name="line">/lift_line.jsp</result>
 			<result name="attendance">/attendance_manage.jsp</result>
-
+			<result name="lift">/lift.jsp</result>
 			<result name="invalid.token">/op_failure_child.jsp</result>
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="token">

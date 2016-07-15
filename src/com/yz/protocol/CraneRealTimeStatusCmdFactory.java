@@ -90,7 +90,7 @@ public class CraneRealTimeStatusCmdFactory extends CmdFactoryBase implements
 		crane.setReportedTime(DateTimeKit.getLocal_Time());
 		
 		try {
-			sqlServiceUtil.addObject(Object_type.LIFT, crane);
+			sqlServiceUtil.addObject(Object_type.CRANE, crane);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("塔基数据添加失败");

@@ -16,6 +16,7 @@
 		<meta name="viewport"
 			content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta http-equiv="refresh" content="5" />
 		<link href="css/noise.css" rel="stylesheet" type="text/css" />
 		<link href="css/Kentucky.css" rel="stylesheet" type="text/css" />
 		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
@@ -23,7 +24,7 @@
 		<title>塔基</title>
 
 	</head>
-	<body>
+	<body onload="">
 		<div class="xmWraper">
 			<div class="xmconbox">
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
@@ -139,7 +140,7 @@
 		</s:iterator>
 
 $(function () {
-	setInterval("ShowLights()",3000);
+	setInterval("ShowLights()",300);
     $('#container').highcharts({
     
         title: {
