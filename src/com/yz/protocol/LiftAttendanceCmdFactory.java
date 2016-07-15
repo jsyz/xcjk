@@ -75,6 +75,20 @@ public class LiftAttendanceCmdFactory extends CmdFactoryBase implements
 
 			String s_driveId = DataConvertor.toString(b_driveId);
 
+			
+			byte[] replydata = new byte[15];
+			
+			for (int i = 0; i < 12; i++) {
+				replydata[i] = data[i];
+			}
+			replydata[12] = 0x01;
+
+			int crc = CRC16.calcCrc16(replydata);
+			replydata[13] = (byte) ((crc & 0xff00) >> 8);
+			replydata[14] = (byte)(crc & 0x00ff);
+			
+			
+			  session.write(IoBuffer.wrap(replydata));
 			System.out.println("the s_driveId is " + s_driveId);
 		} else if (data[4] == 0x04) {
 			byte[] b_driveId = new byte[18];
