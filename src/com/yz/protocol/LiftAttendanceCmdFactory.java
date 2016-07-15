@@ -74,6 +74,19 @@ public class LiftAttendanceCmdFactory extends CmdFactoryBase implements
 			}
 
 			String s_driveId = DataConvertor.toString(b_driveId);
+			
+			if(s_driveId!=null&&s_driveId.length()>0)
+			{
+				Lift lift = new Lift();
+				lift.setSwitchRecord(s_driveId);
+				lift.setReportedTime(DateTimeKit.getLocal_Time());
+				try {
+					sqlServiceUtil.addObject(Object_type.LIFT, lift);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("升降机开关记录添加失败");
+				}
+			}
 
 			
 			byte[] replydata = new byte[15];
@@ -90,6 +103,7 @@ public class LiftAttendanceCmdFactory extends CmdFactoryBase implements
 			
 			  session.write(IoBuffer.wrap(replydata));
 			System.out.println("the s_driveId is " + s_driveId);
+			
 		} else if (data[4] == 0x04) {
 			byte[] b_driveId = new byte[18];
 

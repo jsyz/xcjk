@@ -99,6 +99,13 @@ public class LiftAction extends ActionSupport implements RequestAware,
 		return "attendance";
 	}
 	
+	public String switchRecord() throws Exception {
+
+		lifts = liftService.getLiftsBySwitchRecord();
+		
+		return "lift";
+	}
+	
 
 	public ILiftService getLiftService() {
 		return liftService;
