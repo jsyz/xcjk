@@ -47,15 +47,14 @@ public class LiftAction extends ActionSupport implements RequestAware,
 	private ILiftService liftService;
 	private Lift lift;
 	private List<Lift> lifts;
-	
+
 	public static Lift liftRealTime = new Lift();
-	
-	
+
 	/*
 	 * 实时数据
 	 */
 	public String realtimeLift() {
-		
+
 		JSONObject jsonObject = JSONObject.fromObject(liftRealTime);
 		// System.out.println(jsonObject.toString());
 		PrintWriter out;
@@ -91,21 +90,20 @@ public class LiftAction extends ActionSupport implements RequestAware,
 		lifts = liftService.getLifts();
 		return "line";
 	}
-	
+
 	public String attendance() throws Exception {
 
 		lifts = liftService.getLiftsByAttendance();
-		
+
 		return "attendance";
 	}
-	
+
 	public String switchRecord() throws Exception {
 
 		lifts = liftService.getLiftsBySwitchRecord();
-		
+
 		return "lift";
 	}
-	
 
 	public ILiftService getLiftService() {
 		return liftService;

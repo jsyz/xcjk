@@ -73,7 +73,6 @@ public class CraneAction extends ActionSupport implements RequestAware,
 	public String list() throws Exception {
 		// 判断会话是否失效
 		// 总记录数
-
 		/*
 		 * int projectId = 1;
 		 * 
@@ -88,7 +87,8 @@ public class CraneAction extends ActionSupport implements RequestAware,
 
 	public String listline() throws Exception {
 
-		cranes = craneService.getCranes();
+		cranes = craneService.getCranesByIdDescAndLimit();
+		System.out.println(cranes.size());
 		return "line";
 	}
 
