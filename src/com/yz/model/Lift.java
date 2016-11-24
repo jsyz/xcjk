@@ -29,11 +29,6 @@ public class Lift implements java.io.Serializable {
 	private Boolean DoubleDoorError;//1：双开门限位开关损坏 0：正常
 	private Boolean topDoorError;//1：顶开门限位开关损坏 0：正常
 	
-	
-	
-
-	
-	
 
 
 	public Lift() {

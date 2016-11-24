@@ -20,7 +20,7 @@ public class bytetofloat {
 		byte[] tmp = new byte[length];
 
 		for (int i = 0; i < length; i++)
-			tmp[i] = data[i + offset];
+			tmp[i] =  data[i + offset];
 
 		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(tmp));
 		float f = dis.readFloat();
@@ -30,7 +30,7 @@ public class bytetofloat {
 
 	public static void main(String[] args) throws IOException {
 
-		byte[] a = new byte[] { 0x37, 0x30, 0x2E, 0x37 };
+		byte[] a = new byte[] { (byte)0xe2, 0x30, 0x2E, 0x37 };
 
 		char[] b = new char[4];
 
@@ -45,8 +45,8 @@ public class bytetofloat {
 
 		System.out.print("the resultis +" + nRcvString + "$$"+a.length);
 		// byte[] b = { 0x41, (byte) 0xc8, 0, 0 };
-		// byte[] c = { 0x56 ,(byte) 0x41, (byte)0xfc, (byte)0x0f };
-		// System.out.println(bytes2float(c));
-
+		 byte[] c = { (byte)0xe2 ,(byte) 0x5e, (byte)0x40, (byte)0x19 };
+		 System.out.println("test is "+bytes2float(c,0,4));
+		 
 	}
 }
