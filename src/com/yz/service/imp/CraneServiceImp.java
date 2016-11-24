@@ -112,5 +112,9 @@ public class CraneServiceImp implements ICraneService {
 		}
 		return craneDao.pageList(queryString,p,page,size);
 	}
+	public List<Crane> getCranesByIdDescAndLimit() {
+		String queryString = "from Crane mo  order by id desc";
+		return craneDao.queryList(queryString,10);
+	}
 	
 }

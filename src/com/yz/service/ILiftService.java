@@ -37,4 +37,6 @@ public interface ILiftService {
 
 	public abstract List<Lift> getLiftsByAttendance();
 
+	public abstract List<Lift> getLiftsBySwitchRecord();
+
 }

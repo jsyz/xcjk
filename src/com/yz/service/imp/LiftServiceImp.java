@@ -152,7 +152,13 @@ public class LiftServiceImp implements ILiftService {
 
 	public List<Lift> getLiftsByAttendance() {
 		// TODO Auto-generated method stub
-		String queryString = "from Lift mo where 1=1 and mo.attendanceData!=null";
+		String queryString = "from Lift mo where 1=1 and mo.attendanceData!=null order by id desc";
+		return liftDao.queryList(queryString);
+	}
+
+	public List<Lift> getLiftsBySwitchRecord() {
+		// TODO Auto-generated method stub
+		String queryString = "from Lift mo where 1=1 and mo.switchRecord!=null order by id desc";
 		return liftDao.queryList(queryString);
 	}
 }

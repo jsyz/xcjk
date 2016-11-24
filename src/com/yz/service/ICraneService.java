@@ -34,5 +34,7 @@ public interface ICraneService {
 	public abstract List<Crane> queryList(int con, String convalue,
 			Crane crane, int page, int size);
 
+	public abstract List<Crane> getCranesByIdDescAndLimit();
+
 
 }

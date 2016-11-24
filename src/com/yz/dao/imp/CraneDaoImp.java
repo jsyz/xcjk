@@ -101,6 +101,23 @@ public class CraneDaoImp implements ICraneDao {
 		return this.hibernateTemplate.find(queryString);
 	}
 	
+	//根据hql语句来查询所有记录
+	/* (non-Javadoc)
+	 * @see com.yz.dao.imp.IcraneDao#queryList(java.lang.String)
+	 */
+	public List<Crane> queryList(final String hql,final int maxSize) {
+		return this.hibernateTemplate.executeFind(new HibernateCallback(){
+
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				Query query=session.createQuery(hql);
+				query.setMaxResults(maxSize);
+				return query.list();
+			}
+			
+		});
+	}
+	
 	//根据hql、条件值查询某些记录
 	/* (non-Javadoc)
 	 * @see com.yz.dao.imp.IcraneDao#getObjectsByCondition(java.lang.String, java.lang.Object[])

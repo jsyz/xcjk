@@ -48,7 +48,7 @@ public class LiftRealTimeStatusCmdFactory extends CmdFactoryBase implements
 			}
 		}
 		for (boolean a : flag1) {
-			System.out.println("the flag1 is " + a);
+			System.out.println("the Liftflag1 is " + a);
 		}
 
 		// 获得升降机实时数据

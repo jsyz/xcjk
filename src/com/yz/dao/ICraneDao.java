@@ -31,6 +31,8 @@ public interface ICraneDao {
 
 	// 根据hql语句来查询所有记录
 	public abstract List<Crane> queryList(String queryString);
+	
+	public List<Crane> queryList(final String hql,final int maxSize);
 
 	// 根据hql、条件值查询某些记录
 	public abstract List<Crane> getObjectsByCondition(String queryString,

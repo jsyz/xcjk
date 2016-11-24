@@ -323,3 +323,38 @@ body{font-size:14px}
 .xm-jk{
 	border: 1px solid #FFF;
 }
+.yzconbox{
+	margin:0 auto;
+	width:90%;
+	overflow:hidden;
+}
+.yzconboxb{
+	width:40%;
+	text-align:center;
+	padding-top:10px;
+	padding-bottom:10px;
+	background-color: rgba(221,224, 232, 0.55);
+	z-index:1;
+	position:absolute;
+	margin-top:680px;
+	margin-left:25%;
+	border-radius:100px;
+	border:3px solid rgba(221,224, 232, 0.80);
+	
+	
+}
+.yzconboxc{
+	width:100%;
+	float:left;
+	background-color: #F0F4F6;
+	border-top: 1px solid #FFF;
+	border-bottom: 1px solid #DDE0E8;
+}
+
+.yzconboxb img:hover{
+	background-image: url(../images/jkbg.png);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:80%;
+}
+

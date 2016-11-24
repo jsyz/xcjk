@@ -1,4 +1,13 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -7,13 +16,14 @@
 		<meta name="viewport"
 			content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta http-equiv="refresh" content="5" />
 		<link href="css/noise.css" rel="stylesheet" type="text/css" />
 		<link href="css/Kentucky.css" rel="stylesheet" type="text/css" />
 		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet"
 			type="text/css" />
 		<title>塔机</title>
 	</head>
-	<body>
+	<body onload="">
 		<div class="xmWraper">
 			<div class="xmconbox">
 				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
@@ -25,7 +35,7 @@
 									起重量(t)
 								</th>
 								<th width="10%">
-									起升高度 
+									起升高度
 								</th>
 								<th width="10%">
 									变幅幅度(m)
@@ -89,12 +99,16 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
-					<div id="container"
-						style="min-width: 450px; height: 230px; width: 100%; border: 1px solid #09F"></div>
-					<div id="container1"
-						style="min-width: 450px; height: 230px; width: 100%; border: 1px solid #09F"></div>
-				</div>
+				<div id="container"
+					style="min-width: 450px; height: 160px; width: 100%; border: 1px solid #09F; margin-top: 10px;"></div>
+				<div id="container1"
+					style="min-width: 450px; height: 160px; width: 100%; border: 1px solid #09F; margin-top: 10px;"></div>
+				<div id="container2"
+					style="min-width: 450px; height: 160px; width: 100%; border: 1px solid #09F; margin-top: 10px;"></div>
+				<div id="container3"
+					style="min-width: 450px; height: 160px; width: 100%; border: 1px solid #09F; margin-top: 10px;"></div>
+				<div id="container4"
+					style="min-width: 450px; height: 150px; width: 100%; border: 1px solid #09F; margin-top: 10px;"></div>
 			</div>
 
 		</div>
@@ -110,9 +124,22 @@
 		<script type="text/javascript" src="js/H-ui.js"></script>
 		<script type="text/javascript" src="js/H-ui.admin.js"></script>
 		<script type="text/javascript">
+		
+		
+		var index =new Array();
+		var dataT = new Array();
+		var dataM = new Array();
+		var dataF = new Array();
+		
+		<s:iterator value="cranes" var="crane" status="index">
+				index.push(<s:property value="#index.count"/>);
+				dataT.push(<s:property value="liftingCapacity"/>);
+				dataM.push(<s:property value="liftingHeight"/>);
+				dataF.push(<s:property value="windVelocity"/>);
+		</s:iterator>
 
 $(function () {
-	setInterval("ShowLights()",3000);
+	setInterval("ShowLights()",300);
     $('#container').highcharts({
     
         title: {
@@ -232,6 +259,123 @@ $(function () {
     });
 });
 
+
+$(function () {
+    $('#container2').highcharts({
+        title: {
+            text: '重量记录',
+            x: -20 //center
+        },
+        subtitle: {
+            x: -20
+        },
+        xAxis: {
+            categories: index
+        },
+        yAxis: {
+            title: {
+                text: '顿'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '顿'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '重量记录',
+            data: dataT
+        }]
+    });
+});
+
+
+$(function () {
+    $('#container3').highcharts({
+        title: {
+            text: '高度记录',
+            x: -20 //center
+        },
+        subtitle: {
+            x: -20
+        },
+        xAxis: {
+            categories: index
+        },
+        yAxis: {
+            title: {
+                text: '米'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '米'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '高度记录',
+            data: dataM
+        }]
+    });
+});
+
+
+$(function () {
+    $('#container4').highcharts({
+        title: {
+            text: '风速记录',
+            x: -20 //center
+        },
+        subtitle: {
+            x: -20
+        },
+        xAxis: {
+            categories: index
+        },
+        yAxis: {
+            title: {
+                text: 'm/s'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: 'm/s'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '风速记录',
+            data: dataF
+        }]
+    });
+});
+
 function ShowLights(){
 				  $.ajax({   
 				            url:'realtimeCrane',//这里是你的action或者servlert的路径地址   
@@ -244,7 +388,6 @@ function ShowLights(){
 				            { //成功   
 				             if(msg!=null)
 				             {
-				             	
 			             		$("#liftingCapacity").text(msg.liftingCapacity);
 			             		$("#liftingHeight").text(msg.liftingHeight);
 			             		$("#luffingWidth").text(msg.luffingWidth);
@@ -255,7 +398,6 @@ function ShowLights(){
 			             		$("#torquePercent").text(msg.torquePercent);
 			             		$("#ratedCapacity").text(msg.ratedCapacity);
 			             		$("#capacityPercent").text(msg.capacityPercent);
-				             	
 				             }
 				            }  
 		            });        	 
