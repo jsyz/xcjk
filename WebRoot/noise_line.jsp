@@ -11,7 +11,7 @@
 <html>
 	<head>
 		<meta content="charset=utf-8" />
-		<title>扬尘折线图</title>
+		<title>噪音折线图</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<link href="css/stilearn-helper.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
@@ -28,7 +28,7 @@
 		var date =new Array();
 		var data = new Array();
 		
-		<s:iterator value="dusts" var="dust" status="index">
+		<s:iterator value="noises" var="noise" status="index">
 				date.push('<s:property value="reportedTime"/>');
 				data.push(<s:property value="data"/>);
 		</s:iterator>
@@ -36,11 +36,14 @@
 		
     $(function () {
     
-   setInterval("ShowLights()",3000);
+    setInterval("ShowLights()",3000);
     
     $('#container').highcharts({
+   		 chart: {
+            type: 'line'
+        },
         title: {
-            text: '扬尘颗粒折线图',
+            text: '噪音颗粒折线图',
             x: -20 //center
         },
         subtitle: {
@@ -85,7 +88,7 @@
             }
         },
         series: [{
-            name: '扬尘颗粒',
+            name: '噪音颗粒',
             data: data
         }]
     });
@@ -93,11 +96,11 @@
 
 function ShowLights(){
 				  $.ajax({   
-				            url:'realtimeDust',//这里是你的action或者servlert的路径地址   
+				            url:'realtimeNoise',//这里是你的action或者servlert的路径地址   
 				            type:'get', //数据发送方式   
 				            dataType:'json', //接受数据格式 (这里有很多,常用的有html,xml,js,json)   
 				            error: function(msg)
-				            { //失败  
+				            { //失败   
 				            },   
 				            success: function(msg)
 				            { //成功   
@@ -108,13 +111,12 @@ function ShowLights(){
 				             		$("#data").text("暂无数据");
 				             	}else
 				             	{
-				             		$("#data").text(msg.data+"千粒/升");
+				             		$("#data").text(msg.data+"分贝 (db)");
 				             	}
 				             }
 				            }  
 		            });        	 
 		}
-	
   </script>
 	</head>
 
@@ -140,23 +142,27 @@ function ShowLights(){
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr style="height: 35px;">
 									<td>
-										扬尘设备：
+										噪音设备：
 									</td>
 								</tr>
 							</table>
 						</li>
 
 					</ul>
+				<div class="xmWraper">
+							<div class="xmconbox">
+								<div class="row cl Huialert-info box-shadow pd-5 bk-gray radius">
+									<div id="container"
+										style="min-width: 450px; height: 230px; border: 1px solid #09F"></div>
+									<div style="font-size: 80px; text-align: center;">
+										实时数据=
+										<span id="data"></span>
+									</div>
+								</div>
+							</div>
+				
+						</div>
 
-
-					<div id="container"
-						style="min-width: 450px; height: 230px; border: 1px solid #09F"></div>
-					<div style="font-size: 80px; text-align: center;">
-						实时数据=
-						<span id="data"></span>
-					</div>
-					
-					
 
 
 				</div>
