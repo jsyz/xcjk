@@ -19,6 +19,7 @@ public class Dust implements java.io.Serializable {
 	private Integer projectId;
 	private Integer DTUnumber;
 	private String data;
+	private String reportedTime;
 
 	public Dust() {
 	}
@@ -63,6 +64,14 @@ public class Dust implements java.io.Serializable {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+	@Column(name = "reportedTime", length = 30)
+	public String getReportedTime() {
+		return reportedTime;
+	}
+
+	public void setReportedTime(String reportedTime) {
+		this.reportedTime = reportedTime;
 	}
 
 }
