@@ -59,7 +59,7 @@ public class DustDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 		dust_upload.setData(String.valueOf(dustData));
 		dust_upload.setReportedTime(DateTimeKit.getLocal_Time());
 		try {
-			sqlServiceUtil.addObject(Object_type.NOISE, dust_upload);
+			sqlServiceUtil.addObject(Object_type.DUST, dust_upload);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("噪音记录添加失败");

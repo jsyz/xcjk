@@ -139,6 +139,24 @@ public class DustDaoImp implements IDustDao {
 		});
 	}
 	
+	//根据hql、20id列表查询某些记录
+	/* (non-Javadoc)
+	 * @see com.yz.dao.imp.IdustDao#getObjectsByIdList(java.lang.String)
+	 */
+	public List<Dust> getObjectsByLimit(final String hql) {
+		return this.hibernateTemplate.executeFind(new HibernateCallback(){
+
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				Query query=session.createQuery(hql);
+				query.setMaxResults(20);
+				query.setFirstResult(0);
+				return query.list();
+			}
+			
+		});
+	}
+	
 	//根据hql语句、条件值、分页查询某些记录
 	/* (non-Javadoc)
 	 * @see com.yz.dao.imp.IdustDao#pageList(java.lang.String, java.lang.Object[], java.lang.Integer, java.lang.Integer)

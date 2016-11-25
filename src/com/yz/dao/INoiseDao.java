@@ -2,6 +2,7 @@ package com.yz.dao;
 
 import java.util.List;
 
+import com.yz.model.Dust;
 import com.yz.model.Noise;
 
 
@@ -43,6 +44,9 @@ public interface INoiseDao {
 	// 根据hql、id列表查询某些记录
 	public abstract List<Noise> getObjectsByIdList(final String hql,
 			final List<Integer> idList);
+	
+	// 根据hql限制条数20
+	public abstract List<Noise> getObjectsByLimit(final String hql);
 
 	// 根据hql语句、条件值、分页查询某些记录
 	public abstract List<Noise> pageList(final String queryString,

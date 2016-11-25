@@ -2,6 +2,7 @@ package com.yz.service;
 
 import java.util.List;
 
+import com.yz.model.Dust;
 import com.yz.model.Noise;
 
 public interface INoiseService {
@@ -34,5 +35,8 @@ public interface INoiseService {
 			int projectId, int page, int size);
 
 	public abstract int getTotalCount(int con, String convalue, int areaIndex);
+	
+	//取最新的10条件记录
+	public abstract List<Noise> getDustsByLimit();
 
 }

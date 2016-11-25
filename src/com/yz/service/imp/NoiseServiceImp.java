@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.yz.dao.INoiseDao;
+import com.yz.model.Dust;
 import com.yz.model.Noise;
 import com.yz.service.INoiseService;
 @Component("noiseService")
@@ -151,6 +152,12 @@ public class NoiseServiceImp implements INoiseService {
 			p = new Object[]{'%'+convalue+'%'};
 		}
 		return noiseDao.pageList(queryString,p,page,size);
+	}
+	
+	public List<Noise> getDustsByLimit() {
+		// TODO Auto-generated method stub
+		String queryString = "from Noise mo  order by id desc";
+		return noiseDao.getObjectsByLimit(queryString);
 	}
 	
 	

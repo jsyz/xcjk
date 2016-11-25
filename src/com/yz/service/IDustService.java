@@ -35,4 +35,7 @@ public interface IDustService {
 	public abstract List<Dust> queryList(int con, String convalue,
 			int projectId, int page, int size);
 
+	//取最新的10条件记录
+	public abstract List<Dust> getDustsByLimit();
+
 }

@@ -99,7 +99,9 @@ public class DustAction extends ActionSupport implements RequestAware,
 
 	public String listline() throws Exception {
 
-		dusts = dustService.getDusts();
+		
+		
+		dusts = dustService.getDustsByLimit();
 		return "line";
 	}
 

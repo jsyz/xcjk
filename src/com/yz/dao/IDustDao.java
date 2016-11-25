@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.yz.model.Dust;
 
-
 public interface IDustDao {
 
 	// 保存一条记录
@@ -43,6 +42,9 @@ public interface IDustDao {
 	// 根据hql、id列表查询某些记录
 	public abstract List<Dust> getObjectsByIdList(final String hql,
 			final List<Integer> idList);
+
+	// 根据hql限制条数20
+	public abstract List<Dust> getObjectsByLimit(final String hql);
 
 	// 根据hql语句、条件值、分页查询某些记录
 	public abstract List<Dust> pageList(final String queryString,
