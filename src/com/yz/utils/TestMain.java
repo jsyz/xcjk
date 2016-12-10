@@ -8,10 +8,13 @@ public class TestMain {
 	
 	public static void main(String[] args) {
 		
-		DustJson dustJson = new DustJson();
-		dustJson.setData("1");
-		JSONObject jsonObject = JSONObject.fromObject(dustJson);
-		System.out.println(jsonObject);
+		String noiseData = "0n123123";
+		if(noiseData!=null&&noiseData.length()>0&&noiseData.substring(0, 1).equals("0"))
+		{
+			noiseData = noiseData.substring(1, noiseData.length());
+		}
+		System.out.println(noiseData);
+
 	}
 
 }

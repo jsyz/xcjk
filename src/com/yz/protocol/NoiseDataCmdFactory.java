@@ -45,6 +45,11 @@ public class NoiseDataCmdFactory extends CmdFactoryBase implements ICmdParser {
 
 		String noiseData = DataConvertor.toAsciiString(data, 1, 5);
 		// String noiseData =
+		
+		if(noiseData!=null&&noiseData.length()>0&&noiseData.substring(0, 1).equals("0"))
+		{
+			noiseData = noiseData.substring(1, noiseData.length());
+		}
 
 		// 保存噪音数据
 		Noise noise = NoiseAction.noiseRealTime;
