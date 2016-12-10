@@ -172,4 +172,38 @@
 			</result>
 		</action>
 	</package>
+	
+	
+	<package name="camera" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="cameraAction" class="cameraAction">
+			<result name="loginSucc">/index.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+			<result name="opfailure_child">
+				/op_failure_child.jsp
+			</result>
+			<result name="success">/op_success.jsp</result>
+			<result name="success_child">/op_success_child.jsp</result>
+			<result name="fail">/op_failure.jsp</result>
+			<result name="operror">/op_error.jsp</result>
+
+			<result name="invalid.token">/op_failure_child.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="token">
+				<param name="includeMethods">add</param>
+				<param name="excludeMethods">default</param>
+			</interceptor-ref>
+		</action>
+	</package>
+
+	<package name="camera_ajax" extends="json-default">
+		<action name="getCamerasByProjectID" class="cameraAction" method="getCamerasByProjectID">
+			<result type="json">
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+	</package>
 </struts>
