@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import com.yz.protocol.CommandCraneAttendance;
 import com.yz.protocol.CommandCraneRealTimeStatus;
 import com.yz.protocol.CommandCraneTiming;
+import com.yz.protocol.CommandData212;
 import com.yz.protocol.CommandDtuHeartBeat;
 import com.yz.protocol.CommandDustData;
 import com.yz.protocol.CommandLiftAttendance;
@@ -16,6 +17,7 @@ import com.yz.protocol.CommandNoiseData;
 import com.yz.protocol.CraneAttendanceCmdFactory;
 import com.yz.protocol.CraneRealTimeStatusCmdFactory;
 import com.yz.protocol.CraneTimingCmdFactory;
+import com.yz.protocol.Data212CmdFactory;
 import com.yz.protocol.DtuHeartBeatCmdFactory;
 import com.yz.protocol.DustDataCmdFactory;
 import com.yz.protocol.LiftAttendanceCmdFactory;
@@ -34,8 +36,8 @@ public class CmdFactoryBase implements ICmdParser {
 				2), LIFT_ATTENDANCE(3), // 考勤数据上传
 		DUST_DATA(4), NOISE_DATA(5), CRANE_TIMING(6), 
 		CRANE_ATTENDANCE(7),
-		CRANE_REALTIME_STATUS(8);
-
+		CRANE_REALTIME_STATUS(8),
+		DATA_212(9);
 		private final int _val;
 
 		private MONITOR_CMD_TYPE(int val) {
@@ -66,6 +68,8 @@ public class CmdFactoryBase implements ICmdParser {
 				return CRANE_ATTENDANCE;
 			case 8:
 				return CRANE_REALTIME_STATUS;
+			case 9:
+				return DATA_212;
 			default:
 				return UNKNOWN_CMD;
 
@@ -75,107 +79,115 @@ public class CmdFactoryBase implements ICmdParser {
 
 	public static MONITOR_CMD_TYPE getCommandType(byte[] data) {
 
-		// int command = data[7] & 0xFF;
 		
-		if(data[0] == 0x21){
-			//noise
-			return MONITOR_CMD_TYPE.valueOf(5);
+	//老版本	
+//		if(data[0] == 0x21){
+//			//noise
+//			return MONITOR_CMD_TYPE.valueOf(5);
+//		}
+//		
+//		if (data[0] == 0x41) {
+//			byte tmpbytes[] = new byte[] { 0x41, 0x41, 0x41, 0x41 };
+//
+//			int tmp_sum = 0;
+//
+//			for (int i = 0; i < tmpbytes.length; i++) {
+//				if (tmpbytes[i] == data[i]) {
+//					tmp_sum++;
+//				}
+//			}
+//
+//			if (tmp_sum == 4) {
+//				return MONITOR_CMD_TYPE.valueOf(0);
+//			}
+//		}
+//
+//		if (data[0] == 0x42) {
+//			byte tmpbytes[] = new byte[] { 0x42, 0x42, 0x42, 0x42 };
+//
+//			int tmp_sum = 0;
+//
+//			for (int i = 0; i < tmpbytes.length; i++) {
+//				if (tmpbytes[i] == data[i]) {
+//					tmp_sum++;
+//				}
+//			}
+//
+//			if (tmp_sum == 4) {
+//				return MONITOR_CMD_TYPE.valueOf(0);
+//			}
+//		}
+//
+//		if (data[0] == (byte) 0xA0 && data[1] == (byte) 0x0A) {
+//			if (data[9] == 0x10) {
+//				return MONITOR_CMD_TYPE.valueOf(2);
+//			}
+//			if (data[9] == 0x12) {
+//				return MONITOR_CMD_TYPE.valueOf(1);
+//			}
+//			if (data[9] == 0x25) {
+//				return MONITOR_CMD_TYPE.valueOf(3);
+//			}
+//		}
+//
+//		if (data[1] == 0x04 && data[2] == 0x02) {
+//			return MONITOR_CMD_TYPE.valueOf(4);
+//		}
+//
+//		if (data[0] == (byte) 0xA0) {
+//			if(data[1] == 0x18 && data[7] == 0x00 && data[8] == 0x01)
+//				return MONITOR_CMD_TYPE.valueOf(6);
+//			if(data[1] == 0x24 && data[7] == 0x00 && data[8] == 0x12)
+//				return MONITOR_CMD_TYPE.valueOf(7);
+//			if(data[1] == 0x46 && data[7] == 0x00 && data[8] == 0x07)
+//				return MONITOR_CMD_TYPE.valueOf(8);
+//		}
+//
+//		byte xmlbytes[] = new byte[5];
+//
+//		for (int i = 0; i < xmlbytes.length; i++) {
+//			xmlbytes[i] = data[i];
+//		}
+//		if (DataConvertor.bytesToHexString(xmlbytes).equals("<?xml")) {
+//			if (DataConvertor.bytesToHexString(data).contains("SIGNALSART")) {
+//				return MONITOR_CMD_TYPE.valueOf(7);
+//			} else if (DataConvertor.bytesToHexString(data).contains(
+//					"SIGNALEND")) {
+//				return MONITOR_CMD_TYPE.valueOf(8);
+//			} else {
+//				return MONITOR_CMD_TYPE.valueOf(-1);
+//
+//			}
+//		} else {
+//
+//			int sum = 0;
+//			int flag_ff = 0;
+//			for (int i = 0; i < 4; i++) {
+//				if (data[i] == -1)
+//					sum++;
+//			}
+//
+//			for (int i = 0; i < data.length; i++) {
+//				if (data[i] == -1) {
+//
+//				}
+//			}
+//
+//			if (sum == 4) {
+//				int command = data[6];
+//				return MONITOR_CMD_TYPE.valueOf(command);
+//			} else {
+//				return MONITOR_CMD_TYPE.valueOf(-1);
+//			}
+//		}
+		
+		
+		if(data[0]==0x23 && data[1]==0x23){
+			return MONITOR_CMD_TYPE.valueOf(9);
+		}else{
+			return MONITOR_CMD_TYPE.valueOf(-1);
 		}
 		
-		if (data[0] == 0x41) {
-			byte tmpbytes[] = new byte[] { 0x41, 0x41, 0x41, 0x41 };
-
-			int tmp_sum = 0;
-
-			for (int i = 0; i < tmpbytes.length; i++) {
-				if (tmpbytes[i] == data[i]) {
-					tmp_sum++;
-				}
-			}
-
-			if (tmp_sum == 4) {
-				return MONITOR_CMD_TYPE.valueOf(0);
-			}
-		}
-
-		if (data[0] == 0x42) {
-			byte tmpbytes[] = new byte[] { 0x42, 0x42, 0x42, 0x42 };
-
-			int tmp_sum = 0;
-
-			for (int i = 0; i < tmpbytes.length; i++) {
-				if (tmpbytes[i] == data[i]) {
-					tmp_sum++;
-				}
-			}
-
-			if (tmp_sum == 4) {
-				return MONITOR_CMD_TYPE.valueOf(0);
-			}
-		}
-
-		if (data[0] == (byte) 0xA0 && data[1] == (byte) 0x0A) {
-			if (data[9] == 0x10) {
-				return MONITOR_CMD_TYPE.valueOf(2);
-			}
-			if (data[9] == 0x12) {
-				return MONITOR_CMD_TYPE.valueOf(1);
-			}
-			if (data[9] == 0x25) {
-				return MONITOR_CMD_TYPE.valueOf(3);
-			}
-		}
-
-		if (data[1] == 0x04 && data[2] == 0x02) {
-			return MONITOR_CMD_TYPE.valueOf(4);
-		}
-
-		if (data[0] == (byte) 0xA0) {
-			if(data[1] == 0x18 && data[7] == 0x00 && data[8] == 0x01)
-				return MONITOR_CMD_TYPE.valueOf(6);
-			if(data[1] == 0x24 && data[7] == 0x00 && data[8] == 0x12)
-				return MONITOR_CMD_TYPE.valueOf(7);
-			if(data[1] == 0x46 && data[7] == 0x00 && data[8] == 0x07)
-				return MONITOR_CMD_TYPE.valueOf(8);
-		}
-
-		byte xmlbytes[] = new byte[5];
-
-		for (int i = 0; i < xmlbytes.length; i++) {
-			xmlbytes[i] = data[i];
-		}
-		if (DataConvertor.bytesToHexString(xmlbytes).equals("<?xml")) {
-			if (DataConvertor.bytesToHexString(data).contains("SIGNALSART")) {
-				return MONITOR_CMD_TYPE.valueOf(7);
-			} else if (DataConvertor.bytesToHexString(data).contains(
-					"SIGNALEND")) {
-				return MONITOR_CMD_TYPE.valueOf(8);
-			} else {
-				return MONITOR_CMD_TYPE.valueOf(-1);
-
-			}
-		} else {
-
-			int sum = 0;
-			int flag_ff = 0;
-			for (int i = 0; i < 4; i++) {
-				if (data[i] == -1)
-					sum++;
-			}
-
-			for (int i = 0; i < data.length; i++) {
-				if (data[i] == -1) {
-
-				}
-			}
-
-			if (sum == 4) {
-				int command = data[6];
-				return MONITOR_CMD_TYPE.valueOf(command);
-			} else {
-				return MONITOR_CMD_TYPE.valueOf(-1);
-			}
-		}
 	}
 
 	public static CmdFactoryBase SelectCmdFactory(IoSession session,
@@ -226,6 +238,9 @@ public class CmdFactoryBase implements ICmdParser {
 		case CRANE_REALTIME_STATUS:
 			// log.debug("img upload factory");
 			 factory = new CraneRealTimeStatusCmdFactory(data);
+			break;
+		case DATA_212:
+			factory = new Data212CmdFactory(data);
 			break;
 		}
 
@@ -279,6 +294,9 @@ public class CmdFactoryBase implements ICmdParser {
 			 break;
 		case CRANE_REALTIME_STATUS:
 			 cmd = new CommandCraneRealTimeStatus(this,m_oData);
+			break;
+		case DATA_212:
+			cmd = new CommandData212(this,m_oData);
 			break;
 		}
 		return cmd;

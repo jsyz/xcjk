@@ -18,6 +18,17 @@ public class Camera implements java.io.Serializable {
 	private Integer pid;
 	private String numbers;
 	private Integer size;
+	private Integer carrieroperatorType;
+
+	
+	
+	public Integer getCarrieroperatorType() {
+		return carrieroperatorType;
+	}
+
+	public void setCarrieroperatorType(Integer carrieroperatorType) {
+		this.carrieroperatorType = carrieroperatorType;
+	}
 
 	public Camera() {
 

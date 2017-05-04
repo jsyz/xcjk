@@ -21,7 +21,7 @@ $(".mskeTogBtn").click(function(){$(".msKeimgBox").toggleClass("msKeimgBox2");$(
            url:'getCamerasByProjectID',//这里是你的action或者servlert的路径地址   
            type:'get', //数据发送方式   
            dataType:'json', //接受数据格式 (这里有很多,常用的有html,xml,js,json)  
-           data: { "pid":pid},
+           data:{"pid":pid},
            async:false,
            error: function(msg)
            { //失败  
@@ -32,12 +32,13 @@ $(".mskeTogBtn").click(function(){$(".msKeimgBox").toggleClass("msKeimgBox2");$(
             {
             	numbers = msg.numbers;
             	size = msg.size;
+            	type = msg.carrieroperatorType;
             }
            }  
          });
          
-$("#videoURL").attr("href","videos.html?numbers="+numbers+"&size="+size);
-$("#iframepage").attr('src',"videos.html?numbers="+numbers+"&size="+size); 
+$("#videoURL").attr("href","videos.html?numbers="+numbers+"&size="+size+"&type="+type);
+$("#iframepage").attr('src',"videos.html?numbers="+numbers+"&size="+size+"&type="+type); 
 
 });
 

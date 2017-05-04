@@ -8,6 +8,7 @@ function init(){
 	var params = location.search.substr(1); 
 	var size = GetQueryString("size");
 	var numbers = GetQueryString("numbers");
+	var type = GetQueryString("type");
 	
 	//size = 1;
 	//numbers = "1000243$1$0$0";
@@ -18,9 +19,12 @@ function init(){
 	}else
 	{
 		 var obj = document.getElementById("DPSDK_OCX");
+		 
+		 
+		 
     	 gWndId = obj.DPSDK_CreateSmartWnd(0, 0, 100, 100);
    	 	 ButtonCreateWnd_onclick(size);
-         ButtonLogin_onclick(numbers,size);
+         ButtonLogin_onclick(numbers,size,type);
 	}
 }
 
@@ -49,10 +53,15 @@ function ButtonCreateWnd_onclick(size)
  * 登录
  * @constructor
  */
-function ButtonLogin_onclick(numbers,size)
+function ButtonLogin_onclick(numbers,size,type)
 {
     var obj = document.getElementById("DPSDK_OCX");
-    var result = obj.DPSDK_Login("58.214.39.114", "9000", "智慧工地", "1234567");
+    var result = -1;
+    if(type == 1){
+     result = obj.DPSDK_Login("58.214.39.114", "9000", "智慧工地", "1234567");
+    }else if(type == 2){
+     result = obj.DPSDK_Login("221.131.121.62", "9000", "yxjz", "yxjz2017");
+    }
     if (result == 0)
     {
         //成功,TODO……
