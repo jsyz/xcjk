@@ -11,12 +11,12 @@ $(".mskeClaose").click(function(){$(".mskeLayBg,.mskelayBox").hide()});
 $(".msKeimgBox li").click(function(){$(".mske_html").html($(this).find(".hidden").html());$(".mskeLayBg").show();$(".mskelayBox").fadeIn(300)});
 $(".mskeTogBtn").click(function(){$(".msKeimgBox").toggleClass("msKeimgBox2");$(this).toggleClass("mskeTogBtn2")});
 
- var params = location.search.substr(1); 
 	
- var pid = params.substring(params.indexOf('=')+1,params.length);
-	
- var numbers = "";
+ var pid = GetQueryString("id");
+ var projectName  ="";
  var size = 0;
+ var type = 0;
+
  $.ajax({   
            url:'getCamerasByProjectID',//这里是你的action或者servlert的路径地址   
            type:'get', //数据发送方式   
@@ -30,17 +30,25 @@ $(".mskeTogBtn").click(function(){$(".msKeimgBox").toggleClass("msKeimgBox2");$(
            { //成功 
             if(msg!=null)
             {
-            	numbers = msg.numbers;
+            	projectName = msg.projectName;
             	size = msg.size;
-            	type = msg.carrieroperatorType;
+            	type = msg.type;
             }
            }  
          });
          
-$("#videoURL").attr("href","videos.html?numbers="+numbers+"&size="+size+"&type="+type);
-$("#iframepage").attr('src',"videos.html?numbers="+numbers+"&size="+size+"&type="+type); 
+$("#videoURL").attr("href","videos.html?projectName="+projectName+"&size="+size+"&type="+type);
+$("#iframepage").attr('src',"videos.html?projectName="+projectName+"&size="+size+"&type="+type); 
 
 });
+
+
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
 
 
 

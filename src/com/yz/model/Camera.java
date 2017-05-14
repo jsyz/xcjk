@@ -16,19 +16,9 @@ public class Camera implements java.io.Serializable {
 
 	private Integer id;
 	private Integer pid;
-	private String numbers;
+	private String projectName;
 	private Integer size;
-	private Integer carrieroperatorType;
-
-	
-	
-	public Integer getCarrieroperatorType() {
-		return carrieroperatorType;
-	}
-
-	public void setCarrieroperatorType(Integer carrieroperatorType) {
-		this.carrieroperatorType = carrieroperatorType;
-	}
+	private Integer type;
 
 	public Camera() {
 
@@ -45,13 +35,13 @@ public class Camera implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "numbers")
-	public String getNumbers() {
-		return numbers;
+	@Column(name = "projectName")
+	public String getProjectName() {
+		return projectName;
 	}
 
-	public void setNumbers(String numbers) {
-		this.numbers = numbers;
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 	@Column(name = "size")
@@ -71,7 +61,14 @@ public class Camera implements java.io.Serializable {
 	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
-	
-	
+
+	@Column(name = "type")
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
 }

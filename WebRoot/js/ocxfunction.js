@@ -1,31 +1,72 @@
-
-
-
 var bLogin = 0;
+var type = 0;
+var coding = "";
+var projectName = "";
+var obj = null;
+var windowId = 0;
+var numbers =  new Array(); 
 
 function init(){
 
-	var params = location.search.substr(1); 
-	var size = GetQueryString("size");
-	var numbers = GetQueryString("numbers");
-	var type = GetQueryString("type");
+	type = GetQueryString("type");
+	size = GetQueryString("size");
+	projectName = GetQueryString("projectName");
 	
-	//size = 1;
-	//numbers = "1000243$1$0$0";
+	//step1:创建OCX控件
+	obj = document.getElementById("DPSDK_OCX");
+	 
+	//step2:登录平台
+	type = 2;
+	var loginResult = login();
+	//step:加载组织设备
+	var loadDGropInfoResult=obj.DPSDK_LoadDGroupInfo();
 	
-	if(size<1||numbers=="")
-	{
-		alert("当前工程未添加摄像头。");
-	}else
-	{
-		 var obj = document.getElementById("DPSDK_OCX");
-		 
-		 
-		 
-    	 gWndId = obj.DPSDK_CreateSmartWnd(0, 0, 100, 100);
-   	 	 ButtonCreateWnd_onclick(size);
-         ButtonLogin_onclick(numbers,size,type);
+	setNumbers(projectName,loadXMLDoc(obj.DPSDK_GetDGroupStr()));
+	 
+	windowId = obj.DPSDK_CreateSmartWnd(0, 0, 100, 100);
+ 	createWindow(size);
+    loadNumbers(numbers);
+	       
+}
+
+function setNumbers(projectName,xmldoc)
+{
+	var elements = xmlDoc.getElementsByTagName("Department");
+
+	for (var i = 0; i < elements.length; i++) {
+	
+		if(elements[i].attributes.getNamedItem("name").nodeValue == projectName) 
+		{
+			var sunElements = elements[i].getElementsByTagName("Channel");
+			
+			for(var j = 0; j < sunElements.length; j++)
+			{
+				numbers.push(sunElements[j].attributes.getNamedItem("id").nodeValue);
+			}
+		}
 	}
+
+}
+
+function login()
+{
+	var result = -1;
+	
+    if(type == 1){
+     result = obj.DPSDK_Login("58.214.39.114", "9000", "智慧工地", "1234567");
+    }else if(type == 2){
+     result = obj.DPSDK_Login("221.131.121.62", "9000", "yxjz", "yxjz2017");
+    }
+    
+    if (result == 0)
+    {
+        //成功,TODO……
+    }
+    else
+    {
+        return;
+    }
+	return result;
 }
 
 
@@ -38,61 +79,20 @@ function GetQueryString(name)
 }
 
 
-
-
-function ButtonCreateWnd_onclick(size)
+function createWindow(size)
 {
-    alert(size);
     var obj = document.getElementById("DPSDK_OCX");
-    var nWndCount = size;
-    obj.DPSDK_SetWndCount(gWndId, nWndCount);
-    obj.DPSDK_SetSelWnd(gWndId, 0);
+    obj.DPSDK_SetWndCount(windowId, size);
+    obj.DPSDK_SetSelWnd(windowId, 0);
 }
 
 
-/**
- * 登录
- * @constructor
- */
-function ButtonLogin_onclick(numbers,size,type)
+function loadNumbers(numbers)
 {
-    var obj = document.getElementById("DPSDK_OCX");
-    var result = -1;
-    if(type == 1){
-     result = obj.DPSDK_Login("58.214.39.114", "9000", "智慧工地", "1234567");
-    }else if(type == 2){
-     result = obj.DPSDK_Login("221.131.121.62", "9000", "yxjz", "yxjz2017");
-    }
-    if (result == 0)
+    for(var i=0;i<numbers.length;i++)
     {
-        //成功,TODO……
-        bLogin = 1;
-        
-        var cameraNumbers =  new Array(); 
-        
-        if(numbers.indexOf(",")!=-1)
-        {
-        	cameraNumbers = numbers.split(",");
-        }else
-        {
-        	cameraNumbers[0] = numbers;
-        }
-        
-        alert(cameraNumbers);
-        
-        for(var i=0;i<cameraNumbers.length;i++)
-        {
-             alert(cameraNumbers[i]);
-        	 Button_DirectRealplayByWndNo_onclick(cameraNumbers[i],i);
-        }
+    	Button_DirectRealplayByWndNo_onclick(numbers[i],i);
     }
-    else
-    {
-        //失败打印错误码,TODO……
-
-    }
-
-
 }
 
 
@@ -148,14 +148,16 @@ function ButtonStopRealplayByWndNo_onclick()
  */
 function Button_DirectRealplayByWndNo_onclick(strCameraId,index){
 
+		
+			
         // 获取ocx实例
         var obj = document.getElementById("DPSDK_OCX");
         // 设备id
         var strCameraId = strCameraId;
         // 获取当前活动窗口号,其中m_nSmartWndId是由DPSDK_CreateSmartWnd创建的窗口控件id
-        var nWndNo = obj.DPSDK_GetSelWnd(gWndId);
+        var nWndNo = obj.DPSDK_GetSelWnd(windowId);
         // 开始预览
-        var nResult = obj.DPSDK_DirectRealplayByWndNo(gWndId, index, strCameraId, 1, 1, 1);
+        var nResult = obj.DPSDK_DirectRealplayByWndNo(windowId, index, strCameraId, 1, 1, 1);
         if(nResult == 0)
         {
             // 成功
@@ -167,5 +169,26 @@ function Button_DirectRealplayByWndNo_onclick(strCameraId,index){
 
     }
 
+function loadXMLDoc(text) 
+{
 
-
+try //Internet Explorer
+  {
+  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+  xmlDoc.async="false";
+  xmlDoc.loadXML(text);
+  return xmlDoc;
+  }
+catch(e)
+  {
+  try //Firefox, Mozilla, Opera, etc.
+    {
+    parser=new DOMParser();
+    xmlDoc=parser.parseFromString(text,"text/xml");
+    return  xmlDoc;
+    }
+  catch(e) {
+	  alert(e.message)
+	  }
+  }
+}
