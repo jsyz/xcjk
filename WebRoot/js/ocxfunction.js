@@ -42,6 +42,7 @@ function GetQueryString(name)
 
 function ButtonCreateWnd_onclick(size)
 {
+    alert(size);
     var obj = document.getElementById("DPSDK_OCX");
     var nWndCount = size;
     obj.DPSDK_SetWndCount(gWndId, nWndCount);
@@ -77,8 +78,11 @@ function ButtonLogin_onclick(numbers,size,type)
         	cameraNumbers[0] = numbers;
         }
         
-        for(var i=0;i<size;i++)
+        alert(cameraNumbers);
+        
+        for(var i=0;i<cameraNumbers.length;i++)
         {
+             alert(cameraNumbers[i]);
         	 Button_DirectRealplayByWndNo_onclick(cameraNumbers[i],i);
         }
     }
